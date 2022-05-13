@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/workspace/TourGuide/app/src/main/res/layout/activity_main.xml" value="0.359375" />
+        <entry key="..\:/workspace/TourGuide/app/src/main/res/layout/bottom_navi.xml" value="0.359375" />
+        <entry key="..\:/workspace/TourGuide/app/src/main/res/layout/fragment_home.xml" value="0.359375" />
+        <entry key="..\:/workspace/TourGuide/app/src/main/res/layout/fragment_my_page.xml" value="0.359375" />
       </map>
     </option>
   </component>
