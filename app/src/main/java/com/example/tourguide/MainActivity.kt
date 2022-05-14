@@ -9,12 +9,15 @@ import com.example.tourguide.Fragment.MyPageFragment
 import com.example.tourguide.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var HomeFragment: Fragment
-    private lateinit var  MyPageFragment: Fragment
+    private lateinit var homeFragment: HomeFragment
+    private lateinit var  mypageFragment: MyPageFragment
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,5 +25,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
+        homeFragment = HomeFragment.newInstance()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_layout, homeFragment).commit()
+
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
+
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
+        when(it.itemId) {
+            R.id.action_home -> {
+                homeFragment = HomeFragment.newInstance()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_layout, homeFragment).commit()
+            }
+
+            R.id.action_mypage -> {
+                mypageFragment = MyPageFragment.newInstance()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_layout, mypageFragment).commit()
+            }
+        }
+        true
+    }
+
+
+
 }

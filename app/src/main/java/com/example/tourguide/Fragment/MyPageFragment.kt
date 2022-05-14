@@ -18,4 +18,10 @@ class MyPageFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
 
     }
+
+    companion object {
+        fun newInstance() : MyPageFragment {
+            return MyPageFragment()
+        }
+    }
 }

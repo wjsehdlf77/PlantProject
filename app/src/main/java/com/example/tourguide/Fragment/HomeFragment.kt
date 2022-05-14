@@ -18,4 +18,10 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
 
     }
+
+    companion object {
+        fun newInstance() : HomeFragment {
+            return HomeFragment()
+        }
+    }
 }
