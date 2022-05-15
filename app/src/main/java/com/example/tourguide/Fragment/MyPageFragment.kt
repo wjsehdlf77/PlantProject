@@ -19,9 +19,5 @@ class MyPageFragment : Fragment() {
 
     }
 
-    companion object {
-        fun newInstance() : MyPageFragment {
-            return MyPageFragment()
-        }
-    }
+
 }

@@ -8,16 +8,17 @@ import android.view.ViewGroup
 import com.example.tourguide.R
 
 
-class HomeFragment : Fragment() {
+class Main2Fragment : Fragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
-
+        return inflater.inflate(R.layout.fragment_main2, container, false)
     }
+
 
 
 }

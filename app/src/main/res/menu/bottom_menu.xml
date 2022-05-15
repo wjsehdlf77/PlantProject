@@ -3,10 +3,23 @@
     <item
         android:id="@+id/action_home"
         android:enabled="true"
-        android:title="홈"/>
+        android:title="홈"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/action_main1"
+        android:enabled="true"
+        android:title="메인1"
+        android:icon="@drawable/ic_mypage"/>
+    <item
+        android:id="@+id/action_main2"
+        android:enabled="true"
+        android:title="메인2"
+        android:icon="@drawable/ic_main1"/>
     <item
         android:id="@+id/action_mypage"
         android:enabled="true"
-        android:title="마이페이지"/>
+        android:title="마이페이지"
+        android:icon="@drawable/ic_main2"/>
 
 </menu>
