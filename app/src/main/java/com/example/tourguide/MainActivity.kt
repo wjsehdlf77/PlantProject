@@ -17,50 +17,15 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         navigationItemSelect()
-//
-//        homeFragment = HomeFragment.newInstance()
-//        supportFragmentManager.beginTransaction()
-//            .add(R.id.main_layout, homeFragment).commit()
-//
-//        binding.bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
     }
 
-//    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
-//        when(it.itemId) {
-//            R.id.action_home -> {
-//                homeFragment = HomeFragment.newInstance()
-//                supportFragmentManager.beginTransaction()
-//                    .replace(R.id.main_layout, homeFragment).commit()
-//            }
-//
-//            R.id.action_mypage -> {
-//                mypageFragment = MyPageFragment.newInstance()
-//                supportFragmentManager.beginTransaction()
-//                    .replace(R.id.main_layout, mypageFragment).commit()
-//            }
-//            R.id.action_main1 -> {
-//                main1Fragment = Main1Fragment.newInstance()
-//                supportFragmentManager.beginTransaction()
-//                    .replace(R.id.main_layout, main1Fragment).commit()
-//            }
-//            R.id.action_main2 -> {
-//                main2Fragment = Main2Fragment.newInstance()
-//                supportFragmentManager.beginTransaction()
-//                    .replace(R.id.main_layout, main2Fragment).commit()
-//            }
-//        }
-//        true
-//    }
 private fun replaceFragment(fragment: Fragment) {
     val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
     fragmentTransaction.replace(R.id.main_layout, fragment)
