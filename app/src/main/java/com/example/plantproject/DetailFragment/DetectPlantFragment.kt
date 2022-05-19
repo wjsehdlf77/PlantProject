@@ -17,7 +17,6 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
-import androidx.core.view.isInvisible
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.setFragmentResult
 import com.example.plantproject.MainActivity
