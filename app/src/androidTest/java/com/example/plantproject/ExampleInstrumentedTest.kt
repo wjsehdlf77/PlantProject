@@ -1,4 +1,4 @@
-package com.example.tourguide
+package com.example.plantproject
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

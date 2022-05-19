@@ -1,4 +1,4 @@
-package com.example.tourguide
+package com.example.plantproject
 
 import org.junit.Test
 

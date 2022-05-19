@@ -1,4 +1,4 @@
-package com.example.tourguide.Fragment
+package com.example.plantproject.DetailFragment
 
 import android.content.Context
 import android.content.Intent
@@ -16,20 +16,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import com.example.tourguide.MainActivity
-import com.example.tourguide.R
-import com.example.tourguide.databinding.FragmentMain1Binding
+import androidx.core.os.bundleOf
+import androidx.core.view.isInvisible
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.setFragmentResult
+import com.example.plantproject.MainActivity
+import com.example.plantproject.R
+import com.example.plantproject.databinding.FragmentDetectPlantBinding
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class Main1Fragment : Fragment() {
-    lateinit var filePath: String
-    private var _binding: FragmentMain1Binding? = null
+class DetectPlantFragment : Fragment() {
+
+    private lateinit var filePath: String
+
+    lateinit var bitmapSource : Bitmap
+
+    private lateinit var mainActivity : MainActivity
+
+    private var _binding: FragmentDetectPlantBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var mainActivity: MainActivity
+
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,12 +52,14 @@ class Main1Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMain1Binding.inflate(inflater, container, false)
+        // Inflate the layout for this fragment
+        _binding = FragmentDetectPlantBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         val requestGalleryLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -58,15 +71,16 @@ class Main1Fragment : Fragment() {
                     val source = ImageDecoder.createSource(mainActivity.contentResolver, uri)
                     ImageDecoder.decodeBitmap(source)?.let {
                         val bitmap = resizeBitmap(it, 900f, 0f)
-                        val btp = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-                        binding.imageView.setImageBitmap(btp)
+
+                        bitmapSource = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                        binding.imageView3.setImageBitmap(bitmapSource)
 
                     }
                 } else {
                     MediaStore.Images.Media.getBitmap(mainActivity.contentResolver, uri)?.let {
                         val bitmap = resizeBitmap(it, 900f, 0f)
-                        val btp = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-                        binding.imageView.setImageBitmap(btp)
+                        bitmapSource = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                        binding.imageView3.setImageBitmap(bitmapSource)
                     }
                 }
             } catch (e: Exception) {
@@ -75,7 +89,7 @@ class Main1Fragment : Fragment() {
         }
 
 
-        binding.btnGallary.setOnClickListener {
+        binding.btnGallary2.setOnClickListener {
             //gallery app........................
             val intent = Intent(
                 Intent.ACTION_PICK,
@@ -99,8 +113,8 @@ class Main1Fragment : Fragment() {
                         ImageDecoder.createSource(mainActivity.contentResolver, Uri.fromFile(file))
                     ImageDecoder.decodeBitmap(source)?.let {
                         val bitmap = resizeBitmap(it, 900f, 0f)
-                        val btp = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-                        binding.imageView.setImageBitmap(btp)
+                        bitmapSource = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                        binding.imageView3.setImageBitmap(bitmapSource)
 
                     }
                 } else {
@@ -110,8 +124,8 @@ class Main1Fragment : Fragment() {
                     )
                         ?.let {
                             val bitmap = resizeBitmap(it, 900f, 0f)
-                            val btp = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-                            binding.imageView.setImageBitmap(btp)
+                            bitmapSource = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                            binding.imageView3.setImageBitmap(bitmapSource)
 
                         }
                 }
@@ -120,19 +134,29 @@ class Main1Fragment : Fragment() {
             }
         }
 
-        binding.btnCamera.setOnClickListener {
+        binding.btnCamera2.setOnClickListener {
 
             val file = imageFile()
             filePath = file.absolutePath
             val photoURI: Uri = FileProvider.getUriForFile(
                 mainActivity,
-                "com.example.tourguide.fileprovider", file
+                "com.example.plantproject.fileprovider", file
             )
 
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             requestCameraFileLauncher.launch(intent)
         }
+        binding.btnDetect.setOnClickListener {
+
+            setFragmentResult("requestKey", bundleOf("bundleKey" to bitmapSource))
+
+            val DetectCheckFragment : Fragment = DetectCheckFragment()
+            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.main_layout, DetectCheckFragment)
+            fragmentTransaction.commit()
+        }
+
     }
 
     private fun imageFile(): File {
@@ -169,6 +193,5 @@ class Main1Fragment : Fragment() {
         val resizedBitmap = Bitmap.createBitmap(src, 0, 0, width, height, matrix, true)
         return resizedBitmap
     }
-
 
 }

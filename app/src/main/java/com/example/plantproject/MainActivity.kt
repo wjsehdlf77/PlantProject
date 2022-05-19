@@ -1,18 +1,14 @@
-package com.example.tourguide
+package com.example.plantproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.ui.setupWithNavController
-import com.example.tourguide.Fragment.HomeFragment
-import com.example.tourguide.Fragment.Main1Fragment
-import com.example.tourguide.Fragment.Main2Fragment
-import com.example.tourguide.Fragment.MyPageFragment
-import com.example.tourguide.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
+import com.example.plantproject.NaviFragment.HomeFragment
+import com.example.plantproject.NaviFragment.MyPageFragment
+import com.example.plantproject.NaviFragment.Main2Fragment
+import com.example.plantproject.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
@@ -23,6 +19,7 @@ class MainActivity : AppCompatActivity(){
         setContentView(binding.root)
 
         navigationItemSelect()
+
 
     }
 
@@ -38,7 +35,6 @@ private fun replaceFragment(fragment: Fragment) {
                 when(item.itemId) {
                     R.id.action_home -> replaceFragment(HomeFragment())
                     R.id.action_mypage -> replaceFragment(MyPageFragment())
-                    R.id.action_main1 -> replaceFragment(Main1Fragment())
                     R.id.action_main2 -> replaceFragment(Main2Fragment())
                 }
                 true

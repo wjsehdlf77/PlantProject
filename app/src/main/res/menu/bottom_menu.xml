@@ -7,11 +7,6 @@
         android:icon="@drawable/ic_home"/>
 
     <item
-        android:id="@+id/action_main1"
-        android:enabled="true"
-        android:title="메인1"
-        android:icon="@drawable/ic_mypage"/>
-    <item
         android:id="@+id/action_main2"
         android:enabled="true"
         android:title="메인2"
