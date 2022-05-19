@@ -3,6 +3,7 @@
     <style name="Theme.PlantProject" parent="Theme.MaterialComponents.Light.Bridge">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green</item>
+        <item name="fontFamily">@font/maruburibold</item>
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
