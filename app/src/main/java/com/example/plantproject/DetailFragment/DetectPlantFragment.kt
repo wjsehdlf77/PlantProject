@@ -10,17 +10,22 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.Fragment
+
 import androidx.fragment.app.setFragmentResult
+
+
 import com.example.plantproject.MainActivity
-import com.example.plantproject.R
+import com.example.plantproject.NaviFragment.MyPageFragment
+
+
 import com.example.plantproject.databinding.FragmentDetectPlantBinding
 import java.io.File
 import java.text.SimpleDateFormat
@@ -31,7 +36,7 @@ class DetectPlantFragment : Fragment() {
 
     private lateinit var filePath: String
 
-    lateinit var bitmapSource : Bitmap
+    private lateinit var bitmapSource : Bitmap
 
     private lateinit var mainActivity : MainActivity
 
@@ -150,10 +155,11 @@ class DetectPlantFragment : Fragment() {
 
             setFragmentResult("requestKey", bundleOf("bundleKey" to bitmapSource))
 
-            val DetectCheckFragment : Fragment = DetectCheckFragment()
-            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.main_layout, DetectCheckFragment)
-            fragmentTransaction.commit()
+//            val DetectCheckFragment : Fragment = DetectCheckFragment()
+//            val fragmentTransaction: Fragment = mainActivity.supportFragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.pager, DetectCheckFragment)
+//            fragmentTransaction.commit()
+
         }
 
     }
@@ -191,6 +197,12 @@ class DetectPlantFragment : Fragment() {
         matrix.postScale(scaleWidth, scaleHeight)
         val resizedBitmap = Bitmap.createBitmap(src, 0, 0, width, height, matrix, true)
         return resizedBitmap
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+
     }
 
 }

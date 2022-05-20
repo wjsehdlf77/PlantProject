@@ -16,7 +16,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.fragment.app.FragmentManager
 import com.example.plantproject.MainActivity
+import com.example.plantproject.NaviFragment.MyPageFragment
 import com.example.plantproject.databinding.FragmentMyPlantBinding
 
 import java.io.File

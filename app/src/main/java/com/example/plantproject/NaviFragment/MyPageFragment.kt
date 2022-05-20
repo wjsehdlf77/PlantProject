@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
+
 import com.example.plantproject.DetailFragment.DetectPlantFragment
 import com.example.plantproject.MainActivity
 import com.example.plantproject.DetailFragment.MyPlantFragment
@@ -18,6 +19,7 @@ class MyPageFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var mainActivity: MainActivity
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,17 +41,32 @@ class MyPageFragment : Fragment() {
 
 
         binding.btnMyPlant.setOnClickListener {
-            val MyPlantFragment : Fragment = MyPlantFragment()
+
             val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.main_layout, MyPlantFragment)
-            fragmentTransaction.commit()
+            fragmentTransaction.replace(R.id.main_section_layout, MyPlantFragment()).commitAllowingStateLoss()
+
+
+
+
+
         }
 
         binding.btnWhat.setOnClickListener {
-            val DetectPlantFragment : Fragment = DetectPlantFragment()
+
             val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.main_layout, DetectPlantFragment)
-            fragmentTransaction.commit()
+            fragmentTransaction.replace(R.id.main_section_layout, DetectPlantFragment()).commitAllowingStateLoss()
+
+
+
+
         }
+
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+
+    }
+
+
 }
