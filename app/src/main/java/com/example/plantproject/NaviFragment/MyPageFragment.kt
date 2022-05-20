@@ -43,7 +43,9 @@ class MyPageFragment : Fragment() {
         binding.btnMyPlant.setOnClickListener {
 
             val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.main_section_layout, MyPlantFragment()).commitAllowingStateLoss()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_bottom)
+            fragmentTransaction.replace(R.id.main_section_layout, MyPlantFragment())
+            fragmentTransaction.commit()
 
 
 
@@ -54,6 +56,7 @@ class MyPageFragment : Fragment() {
         binding.btnWhat.setOnClickListener {
 
             val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_bottom)
             fragmentTransaction.replace(R.id.main_section_layout, DetectPlantFragment()).commitAllowingStateLoss()
 
 

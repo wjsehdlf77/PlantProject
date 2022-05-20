@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
 import com.example.plantproject.Adapter.FragmentViewPager
+import com.example.plantproject.DetailFragment.MyPlantFragment
 import com.example.plantproject.MainActivity
 import com.example.plantproject.NaviFragment.HomeFragment
 import com.example.plantproject.NaviFragment.Main2Fragment
@@ -37,6 +38,8 @@ class MainSectionFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentMainSectionBinding.inflate(inflater, container, false)
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,10 +47,23 @@ class MainSectionFragment : Fragment() {
 
 
         navigationItemSelect()
+        binding.fab.setOnClickListener {
+            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+            fragmentTransaction.setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
+            fragmentTransaction.replace(R.id.main_section_layout, MyPlantFragment())
+            fragmentTransaction.commit()
+        }
+
     }
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(R.anim.slide_out_top, R.anim.slide_in_bottom)
         fragmentTransaction.replace(R.id.main_section_layout, fragment)
         fragmentTransaction.commit()
     }
@@ -58,13 +74,14 @@ class MainSectionFragment : Fragment() {
                 when (item.itemId) {
                     R.id.action_home -> replaceFragment(HomeFragment())
                     R.id.action_mypage -> replaceFragment(MyPageFragment())
-                    R.id.action_main2 -> replaceFragment(Main2Fragment())
+
                 }
                 true
             }
             selectedItemId = R.id.action_home
         }
     }
+
 
 
 }
