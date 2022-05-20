@@ -6,69 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".Section.MainSectionFragment">
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/main_section_layout"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/main_section_layout"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
 
-<!--    </FrameLayout>-->
+    <!--    </FrameLayout>-->
 
-<!--&lt;!&ndash;    <com.google.android.material.bottomnavigation.BottomNavigationView&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/bottomNavigationView"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:itemBackground="@android:color/white"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:labelVisibilityMode="unlabeled"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:itemIconTint="@drawable/menu_selector_color"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:menu="@menu/bottom_menu"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;    <com.google.android.material.bottomnavigation.BottomNavigationView&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:id="@+id/bottomNavigationView"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:itemBackground="@android:color/white"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:labelVisibilityMode="unlabeled"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:itemIconTint="@drawable/menu_selector_color"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:menu="@menu/bottom_menu"/>&ndash;&gt;-->
 
-<!--    <com.example.plantproject.Custom.CustomBottomNavigationView-->
-<!--        android:id="@+id/bottomNavigationView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:itemBackground="@android:color/white"-->
-<!--        app:labelVisibilityMode="unlabeled"-->
-<!--        app:itemIconTint="@drawable/menu_selector_color"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:menu="@menu/bottom_menu"/>-->
+    <!--    <com.example.plantproject.Custom.CustomBottomNavigationView-->
+    <!--        android:id="@+id/bottomNavigationView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:itemBackground="@android:color/white"-->
+    <!--        app:labelVisibilityMode="unlabeled"-->
+    <!--        app:itemIconTint="@drawable/menu_selector_color"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:menu="@menu/bottom_menu"/>-->
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/layout_bottom_2"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent">-->
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/layout_bottom_2"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:gravity="center"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent">-->
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fab"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:clickable="true"-->
-<!--            android:focusable="true"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:elevation="3dp"-->
-<!--            android:translationZ="2dp"/>-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--            android:id="@+id/fab"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:elevation="3dp"-->
+    <!--            android:translationZ="2dp"/>-->
 
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
+
 
     <FrameLayout
         android:id="@+id/main_section_layout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <com.example.plantproject.Custom.CustomBottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -80,30 +84,66 @@
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_menu" />
 
+
+
+
     </FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_bottom_2"
-        android:layout_width="0dp"
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabDetect"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:contentDescription="detect plant"
+        app:backgroundTint="@color/sand"
+        app:fabSize="mini"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintTop_toTopOf="@id/fabMain"
+        app:layout_constraintBottom_toBottomOf="@id/fabMain"
+        app:layout_constraintStart_toStartOf="@id/fabMain"
+        app:layout_constraintEnd_toEndOf="@id/fabMain"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMyPlant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="care plant"
+        app:backgroundTint="@color/sand"
+        app:fabSize="mini"
+        android:src="@drawable/ic_flower"
+        app:layout_constraintTop_toTopOf="@id/fabMain"
+        app:layout_constraintBottom_toBottomOf="@id/fabMain"
+        app:layout_constraintStart_toStartOf="@id/fabMain"
+        app:layout_constraintEnd_toEndOf="@id/fabMain"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabDiary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="plant diary"
+        app:backgroundTint="@color/sand"
+        app:fabSize="mini"
+        android:src="@drawable/ic_diary"
+        app:layout_constraintTop_toTopOf="@id/fabMain"
+        app:layout_constraintBottom_toBottomOf="@id/fabMain"
+        app:layout_constraintStart_toStartOf="@id/fabMain"
+        app:layout_constraintEnd_toEndOf="@id/fabMain"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="main fab"
+        android:elevation="3dp"
+        android:focusable="true"
+        android:src="@drawable/ic_fabmain"
+        android:translationZ="2dp"
+        app:backgroundTint="@color/sand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:elevation="3dp"
-            android:focusable="true"
-            android:translationZ="2dp"
-            android:src="@drawable/ic_flower"
-            app:backgroundTint="@color/sand"/>
-
-    </LinearLayout>
+        app:layout_constraintRight_toRightOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

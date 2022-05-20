@@ -1,22 +1,21 @@
 package com.example.plantproject.Section
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
-import androidx.viewpager2.widget.ViewPager2
-import com.example.plantproject.Adapter.FragmentViewPager
 import com.example.plantproject.DetailFragment.MyPlantFragment
 import com.example.plantproject.MainActivity
 import com.example.plantproject.NaviFragment.HomeFragment
-import com.example.plantproject.NaviFragment.Main2Fragment
 import com.example.plantproject.NaviFragment.MyPageFragment
 import com.example.plantproject.R
-import com.example.plantproject.databinding.FragmentMain2Binding
 import com.example.plantproject.databinding.FragmentMainSectionBinding
+
 
 
 class MainSectionFragment : Fragment() {
@@ -24,6 +23,10 @@ class MainSectionFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var mainActivity: MainActivity
+
+    private var isFabOpen = false
+
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -40,14 +43,19 @@ class MainSectionFragment : Fragment() {
         return binding.root
 
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         navigationItemSelect()
-        binding.fab.setOnClickListener {
+
+        binding.fabMain.setOnClickListener {
+            toogleFab()
+        }
+
+        binding.fabMyPlant.setOnClickListener {
             val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
             fragmentTransaction.setCustomAnimations(
                 R.anim.slide_in,
@@ -81,6 +89,40 @@ class MainSectionFragment : Fragment() {
             selectedItemId = R.id.action_home
         }
     }
+
+    private fun toogleFab() {
+
+        if(isFabOpen) {
+            ObjectAnimator.ofFloat(binding.fabDetect, "translationY", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabDetect, "translationX", 0f).apply { start() }
+
+            ObjectAnimator.ofFloat(binding.fabDiary, "translationY", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabDiary, "translationX", 0f).apply { start() }
+
+            ObjectAnimator.ofFloat(binding.fabMyPlant, "translationY", 0f).apply { start()}
+
+            ObjectAnimator.ofFloat(binding.fabMain, "translationY", 0f).apply { start()}
+            ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 45f, 0f).apply { start() }
+            binding.fabMain.setImageResource(R.drawable.ic_fabmain)
+
+        } else {
+            ObjectAnimator.ofFloat(binding.fabDetect, "translationY", -150f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabDetect, "translationX", 150f).apply { start() }
+
+            ObjectAnimator.ofFloat(binding.fabDiary, "translationY", -150f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabDiary, "translationX", -150f).apply { start() }
+
+            ObjectAnimator.ofFloat(binding.fabMyPlant, "translationY", -200f).apply { start() }
+
+            ObjectAnimator.ofFloat(binding.fabMain, "translationY", -50f).apply { start()}
+            ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 45f, 0f).apply { start() }
+            binding.fabMain.setImageResource(R.drawable.ic_close)
+
+        }
+        isFabOpen = !isFabOpen
+    }
+
+
 
 
 
