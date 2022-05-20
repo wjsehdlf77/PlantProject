@@ -18,12 +18,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 
 import androidx.fragment.app.setFragmentResult
 
 
 import com.example.plantproject.MainActivity
 import com.example.plantproject.NaviFragment.MyPageFragment
+import com.example.plantproject.R
 
 
 import com.example.plantproject.databinding.FragmentDetectPlantBinding
@@ -155,10 +157,11 @@ class DetectPlantFragment : Fragment() {
 
             setFragmentResult("requestKey", bundleOf("bundleKey" to bitmapSource))
 
-//            val DetectCheckFragment : Fragment = DetectCheckFragment()
-//            val fragmentTransaction: Fragment = mainActivity.supportFragmentManager.beginTransaction()
-//            fragmentTransaction.replace(R.id.pager, DetectCheckFragment)
-//            fragmentTransaction.commit()
+
+            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_bottom)
+            fragmentTransaction.replace(R.id.main_section_layout, DetectCheckFragment())
+            fragmentTransaction.commit()
 
         }
 

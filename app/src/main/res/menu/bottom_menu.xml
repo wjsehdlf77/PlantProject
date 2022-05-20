@@ -7,14 +7,14 @@
         android:icon="@drawable/ic_home"/>
 
     <item
-        android:id="@+id/action_main2"
-        android:enabled="true"
-        android:title="메인2"
-        android:icon="@drawable/ic_main1"/>
+        android:id="@+id/action_empty"
+        android:enabled="false"
+        android:title=""
+        android:checkable="false"/>
     <item
         android:id="@+id/action_mypage"
         android:enabled="true"
         android:title="마이페이지"
-        android:icon="@drawable/ic_main2"/>
+        android:icon="@drawable/ic_user"/>
 
 </menu>
