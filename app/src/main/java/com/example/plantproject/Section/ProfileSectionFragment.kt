@@ -7,9 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.plantproject.MainActivity
-import com.example.plantproject.R
-import com.example.plantproject.databinding.FragmentMain2Binding
-import com.example.plantproject.databinding.FragmentMainSectionBinding
 import com.example.plantproject.databinding.FragmentProfileSectionBinding
 
 
