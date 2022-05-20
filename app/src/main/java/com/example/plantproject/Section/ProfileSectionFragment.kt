@@ -1,17 +1,20 @@
-package com.example.plantproject.NaviFragment
+package com.example.plantproject.Section
 
 import android.content.Context
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.plantproject.MainActivity
+import com.example.plantproject.R
 import com.example.plantproject.databinding.FragmentMain2Binding
+import com.example.plantproject.databinding.FragmentMainSectionBinding
+import com.example.plantproject.databinding.FragmentProfileSectionBinding
 
 
-class Main2Fragment : Fragment() {
-    private var _binding: FragmentMain2Binding? = null
+class ProfileSectionFragment : Fragment() {
+    private var _binding: FragmentProfileSectionBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var mainActivity: MainActivity
@@ -21,15 +24,12 @@ class Main2Fragment : Fragment() {
         mainActivity = context as MainActivity
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMain2Binding.inflate(inflater, container, false)
+        _binding = FragmentProfileSectionBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-
 
 }
