@@ -11,7 +11,7 @@ class CustomBottomNavigationView : BottomNavigationView {
     private var mPath: Path = Path()
     private var mPaint: Paint = Paint()
 
-    private val CURVE_CIRCLE_RADIUS = 230 / 2
+    private val CURVE_CIRCLE_RADIUS = 250 / 2
 
     private val mFirstCurveStartPoint = Point()
     private val mFirstCurveEndPoint = Point()
