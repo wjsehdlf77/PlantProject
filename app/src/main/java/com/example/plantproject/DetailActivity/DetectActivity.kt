@@ -1,70 +1,34 @@
-package com.example.plantproject.DetailFragment
+package com.example.plantproject.DetailActivity
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-
-import androidx.fragment.app.setFragmentResult
-
-
-import com.example.plantproject.MainActivity
-import com.example.plantproject.NaviFragment.MyPageFragment
-import com.example.plantproject.R
-
-
-import com.example.plantproject.databinding.FragmentDetectPlantBinding
+import com.example.plantproject.databinding.ActivityDetectBinding
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
+class DetectActivity : AppCompatActivity() {
 
-class DetectPlantFragment : Fragment() {
-
+    private lateinit var binding: ActivityDetectBinding
     private lateinit var filePath: String
-
     private lateinit var bitmapSource : Bitmap
 
-    private lateinit var mainActivity : MainActivity
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    private var _binding: FragmentDetectPlantBinding? = null
-    private val binding get() = _binding!!
+        binding = ActivityDetectBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentDetectPlantBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
 
         val requestGalleryLauncher = registerForActivityResult(
@@ -74,7 +38,7 @@ class DetectPlantFragment : Fragment() {
             try {
                 val uri = it.data!!.data!!
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    val source = ImageDecoder.createSource(mainActivity.contentResolver, uri)
+                    val source = ImageDecoder.createSource(contentResolver, uri)
                     ImageDecoder.decodeBitmap(source)?.let {
                         val bitmap = resizeBitmap(it, 900f, 0f)
 
@@ -83,7 +47,7 @@ class DetectPlantFragment : Fragment() {
 
                     }
                 } else {
-                    MediaStore.Images.Media.getBitmap(mainActivity.contentResolver, uri)?.let {
+                    MediaStore.Images.Media.getBitmap(contentResolver, uri)?.let {
                         val bitmap = resizeBitmap(it, 900f, 0f)
                         bitmapSource = bitmap.copy(Bitmap.Config.ARGB_8888, true)
                         binding.imageView3.setImageBitmap(bitmapSource)
@@ -116,7 +80,7 @@ class DetectPlantFragment : Fragment() {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     val source =
-                        ImageDecoder.createSource(mainActivity.contentResolver, Uri.fromFile(file))
+                        ImageDecoder.createSource(contentResolver, Uri.fromFile(file))
                     ImageDecoder.decodeBitmap(source)?.let {
                         val bitmap = resizeBitmap(it, 900f, 0f)
                         bitmapSource = bitmap.copy(Bitmap.Config.ARGB_8888, true)
@@ -125,7 +89,7 @@ class DetectPlantFragment : Fragment() {
                     }
                 } else {
                     MediaStore.Images.Media.getBitmap(
-                        mainActivity.contentResolver,
+                        contentResolver,
                         Uri.fromFile(file)
                     )
                         ?.let {
@@ -145,7 +109,7 @@ class DetectPlantFragment : Fragment() {
             val file = imageFile()
             filePath = file.absolutePath
             val photoURI: Uri = FileProvider.getUriForFile(
-                mainActivity,
+                this,
                 "com.example.plantproject.fileprovider", file
             )
 
@@ -153,15 +117,9 @@ class DetectPlantFragment : Fragment() {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             requestCameraFileLauncher.launch(intent)
         }
+
         binding.btnDetect.setOnClickListener {
 
-//            setFragmentResult("requestKey", bundleOf("bundleKey" to bitmapSource))
-//
-//
-//            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-//            fragmentTransaction.setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_bottom)
-//            fragmentTransaction.replace(R.id.main_section_layout, DetectCheckFragment())
-//            fragmentTransaction.commit()
 
         }
 
@@ -171,7 +129,7 @@ class DetectPlantFragment : Fragment() {
         val timeStamp: String =
             SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File? =
-            mainActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         var file = File.createTempFile(
             "JPEG_${timeStamp}_",
             ".jpg",
@@ -201,11 +159,4 @@ class DetectPlantFragment : Fragment() {
         val resizedBitmap = Bitmap.createBitmap(src, 0, 0, width, height, matrix, true)
         return resizedBitmap
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-
-    }
-
 }

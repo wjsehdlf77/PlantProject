@@ -14,7 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlantProject">
         <activity
-            android:name=".content_main"
+            android:name=".DetailActivity.DetectCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailActivity.DiaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailActivity.MyPlantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailActivity.DetectActivity"
             android:exported="false" />
 
         <provider

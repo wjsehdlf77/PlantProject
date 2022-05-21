@@ -5,7 +5,8 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:title="홈"
-        android:icon="@drawable/ic_home"/>
+        android:icon="@drawable/ic_home"
+        android:iconTint="@color/light_green"/>
 
 
     <item
@@ -18,7 +19,8 @@
         android:id="@+id/action_mypage"
         android:enabled="true"
         android:title="마이페이지"
-        android:icon="@drawable/ic_user"/>
+        android:icon="@drawable/ic_user"
+        android:iconTint="@color/light_green"/>
 
 
 

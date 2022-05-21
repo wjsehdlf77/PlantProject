@@ -84,9 +84,6 @@
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_menu" />
 
-
-
-
     </FrameLayout>
 
 
@@ -100,6 +97,7 @@
         app:fabSize="mini"
         android:src="@drawable/ic_camera"
         app:layout_constraintTop_toTopOf="@id/fabMain"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@id/fabMain"
         app:layout_constraintStart_toStartOf="@id/fabMain"
         app:layout_constraintEnd_toEndOf="@id/fabMain"/>
@@ -111,6 +109,7 @@
         android:contentDescription="care plant"
         app:backgroundTint="@color/sand"
         app:fabSize="mini"
+        android:clickable="true"
         android:src="@drawable/ic_flower"
         app:layout_constraintTop_toTopOf="@id/fabMain"
         app:layout_constraintBottom_toBottomOf="@id/fabMain"
@@ -122,6 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="plant diary"
+        android:clickable="true"
         app:backgroundTint="@color/sand"
         app:fabSize="mini"
         android:src="@drawable/ic_diary"
@@ -137,13 +137,14 @@
         android:clickable="true"
         android:contentDescription="main fab"
         android:elevation="3dp"
-        android:focusable="true"
         android:src="@drawable/ic_fabmain"
         android:translationZ="2dp"
         app:backgroundTint="@color/sand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

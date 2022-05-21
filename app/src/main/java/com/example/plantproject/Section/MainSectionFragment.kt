@@ -2,20 +2,21 @@ package com.example.plantproject.Section
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
-import com.example.plantproject.DetailFragment.MyPlantFragment
+import com.example.plantproject.DetailActivity.DetectActivity
+import com.example.plantproject.DetailActivity.DiaryActivity
+import com.example.plantproject.DetailActivity.MyPlantActivity
 import com.example.plantproject.MainActivity
 import com.example.plantproject.NaviFragment.HomeFragment
 import com.example.plantproject.NaviFragment.MyPageFragment
 import com.example.plantproject.R
 import com.example.plantproject.databinding.FragmentMainSectionBinding
-
 
 
 class MainSectionFragment : Fragment() {
@@ -25,6 +26,8 @@ class MainSectionFragment : Fragment() {
     private lateinit var mainActivity: MainActivity
 
     private var isFabOpen = false
+
+
 
 
 
@@ -42,8 +45,6 @@ class MainSectionFragment : Fragment() {
         _binding = FragmentMainSectionBinding.inflate(inflater, container, false)
         return binding.root
 
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,22 +57,35 @@ class MainSectionFragment : Fragment() {
         }
 
         binding.fabMyPlant.setOnClickListener {
-            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.setCustomAnimations(
-                R.anim.slide_in,
-                R.anim.fade_out,
-                R.anim.fade_in,
-                R.anim.slide_out
-            )
-            fragmentTransaction.replace(R.id.main_section_layout, MyPlantFragment())
-            fragmentTransaction.commit()
+
+            val intent = Intent(mainActivity, MyPlantActivity::class.java)
+            startActivity(intent)
+
         }
+
+        binding.fabDiary.setOnClickListener {
+            val intent = Intent(mainActivity, DiaryActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.fabDetect.setOnClickListener {
+            val intent = Intent(mainActivity, DetectActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
 
     }
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-        fragmentTransaction.setCustomAnimations(R.anim.slide_out_top, R.anim.slide_in_bottom)
+        fragmentTransaction.setCustomAnimations(
+            R.anim.slide_in,
+            R.anim.fade_out,
+            R.anim.fade_in,
+            R.anim.slide_out
+        )
         fragmentTransaction.replace(R.id.main_section_layout, fragment)
         fragmentTransaction.commit()
     }
@@ -122,7 +136,11 @@ class MainSectionFragment : Fragment() {
         isFabOpen = !isFabOpen
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
 
+    }
 
 
 
