@@ -14,10 +14,9 @@ class DetectCheckActivity : AppCompatActivity() {
         binding = ActivityDetectCheckBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val image = intent.getParcelableExtra<Bitmap>("iamge")
-
-        binding.imageView5.setImageBitmap(image)
-
+//        val image = intent.getParcelableExtra<Bitmap>("iamge")
+//
+//        binding.imageView5.setImageBitmap(image)
 
     }
 

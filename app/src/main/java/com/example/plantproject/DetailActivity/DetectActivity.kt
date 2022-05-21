@@ -120,7 +120,8 @@ class DetectActivity : AppCompatActivity() {
 
         binding.btnDetect.setOnClickListener {
 
-
+            val intent = Intent(this, DetectCheckActivity::class.java)
+            startActivity(intent)
         }
 
     }
