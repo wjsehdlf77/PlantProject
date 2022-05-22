@@ -120,15 +120,15 @@ class MainSectionFragment : Fragment() {
             binding.fabMain.setImageResource(R.drawable.ic_fabmain)
 
         } else {
-            ObjectAnimator.ofFloat(binding.fabDetect, "translationY", -250f).apply { start() }
-            ObjectAnimator.ofFloat(binding.fabDetect, "translationX", 250f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabDetect, "translationY", -150f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabDetect, "translationX", 150f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.fabDiary, "translationY", -250f).apply { start() }
-            ObjectAnimator.ofFloat(binding.fabDiary, "translationX", -250f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabDiary, "translationY", -150f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabDiary, "translationX", -150f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.fabMyPlant, "translationY", -400f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabMyPlant, "translationY", -250f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.fabMain, "translationY", -150f).apply { start()}
+            ObjectAnimator.ofFloat(binding.fabMain, "translationY", -100f).apply { start()}
             ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 45f, 0f).apply { start() }
             binding.fabMain.setImageResource(R.drawable.ic_close)
 
