@@ -82,7 +82,8 @@
             android:background="#FFFFFF"
             android:translationZ="1dp"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_menu" />
+            app:menu="@menu/bottom_menu"
+            />
 
     </FrameLayout>
 
