@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.plantproject.DetailActivity.DetectActivity
 import com.example.plantproject.DetailActivity.DiaryActivity
 import com.example.plantproject.DetailActivity.MyPlantActivity
+import com.example.plantproject.DetailFragment.DetailDiaryFragment
 import com.example.plantproject.MainActivity
 import com.example.plantproject.NaviFragment.HomeFragment
 import com.example.plantproject.NaviFragment.MyPageFragment
@@ -57,18 +58,21 @@ class MainSectionFragment : Fragment() {
         }
 
         binding.fabMyPlant.setOnClickListener {
-
+            toogleFab()
             val intent = Intent(mainActivity, MyPlantActivity::class.java)
             startActivity(intent)
 
         }
 
         binding.fabDiary.setOnClickListener {
+            toogleFab()
             val intent = Intent(mainActivity, DiaryActivity::class.java)
             startActivity(intent)
+
         }
 
         binding.fabDetect.setOnClickListener {
+            toogleFab()
             val intent = Intent(mainActivity, DetectActivity::class.java)
             startActivity(intent)
 
@@ -142,10 +146,6 @@ class MainSectionFragment : Fragment() {
 
     }
 
-    override fun onPause() {
-        super.onPause()
-        toogleFab()
-    }
 
 
 
