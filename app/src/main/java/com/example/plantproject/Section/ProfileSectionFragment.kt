@@ -10,6 +10,8 @@ import com.example.plantproject.MainActivity
 import com.example.plantproject.databinding.FragmentProfileSectionBinding
 
 
+
+
 class ProfileSectionFragment : Fragment() {
     private var _binding: FragmentProfileSectionBinding? = null
     private val binding get() = _binding!!

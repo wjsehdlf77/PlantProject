@@ -16,8 +16,17 @@
         <!-- Customize your theme here. -->
         <item name="android:windowActivityTransitions">true</item>
         <item name="colorPrimary">@color/light_green</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+<!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
         <item name="fontFamily">@font/maruburibold</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/light_green</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
+<!--        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>-->
+<!--        <item name="android:enforceStatusBarContrast" tools:targetApi="q">false</item>-->
+
 
 
     </style>

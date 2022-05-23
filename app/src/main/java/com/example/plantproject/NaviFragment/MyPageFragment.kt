@@ -14,6 +14,8 @@ import com.example.plantproject.DetailFragment.MyPlantFragment
 import com.example.plantproject.R
 import com.example.plantproject.databinding.FragmentMyPageBinding
 
+//마이페이지 프로필 수정
+
 class MyPageFragment : Fragment() {
     private var _binding: FragmentMyPageBinding? = null
     private val binding get() = _binding!!

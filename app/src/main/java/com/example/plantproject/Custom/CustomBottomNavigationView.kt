@@ -11,6 +11,8 @@ class CustomBottomNavigationView : BottomNavigationView {
     private var mPath: Path = Path()
     private var mPaint: Paint = Paint()
 
+
+    //수치가 높으면 간격이 벌어지고 낮으면 좁아진다
     private val CURVE_CIRCLE_RADIUS = 240 / 2
 
     private val mFirstCurveStartPoint = Point()
