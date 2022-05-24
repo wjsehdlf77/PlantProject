@@ -36,6 +36,7 @@
             android:exported="true">
         </activity>
 
+        <activity
             android:name=".DetailActivity.DetectCheckActivity"
             android:exported="false" />
         <activity

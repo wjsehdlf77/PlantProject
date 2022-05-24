@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
@@ -153,6 +152,7 @@ class DetectActivity : AppCompatActivity() {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
 //                    val msg = "Photo capture succeeded: ${output.savedUri}"
 //                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+
                     val intent = Intent(baseContext, DetectCheckActivity::class.java)
                     startActivity(intent)
 

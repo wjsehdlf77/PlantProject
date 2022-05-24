@@ -14,6 +14,8 @@ class LoginActivity : AppCompatActivity() {
     val DATABASE_NAME = "LocalDB.db"
     private lateinit var binding: ActivityLoginBinding
     private lateinit var localDB: LocalDB
+
+
     //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //
