@@ -1,6 +1,7 @@
 package com.example.plantproject
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction
 
 
 import com.example.plantproject.Adapter.FragmentViewPager
+import com.example.plantproject.DetailActivity.DetectActivity
 import com.example.plantproject.NaviFragment.HomeFragment
 
 import com.example.plantproject.databinding.ActivityMainBinding
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.pager.adapter = FragmentViewPager(this)
+
 
 
     }

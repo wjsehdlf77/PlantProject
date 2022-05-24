@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DetailFragment.MyPlantFragment"
-    android:background="@drawable/in_layout_shape">
+    tools:context=".DetailFragment.MyPlantFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarMyPlant"
@@ -48,9 +47,7 @@
             app:layout_constraintHorizontal_bias="0.85"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.796">
-
-        </FrameLayout>
+            app:layout_constraintVertical_bias="0.796"/>
 
         <FrameLayout
             android:id="@+id/frameLayout2"
