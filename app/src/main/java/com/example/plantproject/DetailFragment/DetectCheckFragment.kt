@@ -28,12 +28,12 @@ class DetectCheckFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setFragmentResultListener("requestKey") { key, bundle ->
-            // We use a String here, but any type that can be put in a Bundle is supported
-            val result = bundle.getParcelable<Bitmap>("bundleKey")
-
-            binding.imageView5.setImageBitmap(result)
-        }
+//        setFragmentResultListener("requestKey") { key, bundle ->
+//            // We use a String here, but any type that can be put in a Bundle is supported
+//            val result = bundle.getParcelable<Bitmap>("bundleKey")
+//
+//            binding.imageView5.setImageBitmap(result)
+//        }
     }
 
 
