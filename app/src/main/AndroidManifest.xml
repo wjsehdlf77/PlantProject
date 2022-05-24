@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,6 +19,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlantProject">
         <activity
+
+            android:name=".SplashActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+        </activity>
+
             android:name=".DetailActivity.DetectCheckActivity"
             android:exported="false" />
         <activity
@@ -42,13 +60,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
