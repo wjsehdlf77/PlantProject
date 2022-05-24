@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/background">
 
     <EditText
         android:id="@+id/edit_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="312dp"
+        android:layout_marginTop="128dp"
         android:ems="10"
         android:hint="아이디"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,12 +24,12 @@
         android:id="@+id/edit_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_id" />
 
@@ -36,22 +37,22 @@
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="24dp"
         android:text="로그인"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_pw" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_pw"
+        android:backgroundTint="#85AF04"/>
 
     <Button
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
-        android:text="가입하기"
+        android:layout_marginEnd="152dp"
+        android:text="회원가입"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_pw" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_pw"
+        android:backgroundTint="#85AF04"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
