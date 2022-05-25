@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     var mBackWait:Long = 0
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
