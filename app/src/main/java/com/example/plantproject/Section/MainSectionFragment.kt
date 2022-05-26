@@ -21,13 +21,13 @@ import com.example.plantproject.databinding.FragmentMainSectionBinding
 
 
 class MainSectionFragment : Fragment() {
+
     private var _binding: FragmentMainSectionBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var mainActivity: MainActivity
 
     private var isFabOpen = false
-
 
 
 
@@ -77,6 +77,7 @@ class MainSectionFragment : Fragment() {
             startActivity(intent)
 
         }
+
 
 
 
