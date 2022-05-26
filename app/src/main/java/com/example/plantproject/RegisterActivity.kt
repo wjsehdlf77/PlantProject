@@ -16,6 +16,7 @@ import org.json.JSONObject
 var isExistBlank = false
 var isPWSame = false
 var isExist = false
+var isDataCheck = false
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var localDB: LocalDB
@@ -28,54 +29,21 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)    // 뷰 바인딩
         val view = binding.root
         setContentView(view)
+        
+        binding.agreedata.setOnCheckedChangeListener { compoundButton, isChecked ->
+            isDataCheck = isChecked
+        }
 
 
 //        localDB = LocalDB(this, DATABASE_NAME, null, DATABASE_VERSION) // SQLite 모듈 생성
 
         binding.btnRegister.setOnClickListener {
-//            val responseListener =
-//                Response.Listener<String> { response ->
-//                    try {
-//                        val jsonResponse = JSONObject(response)
-//                        val success = jsonResponse.getBoolean("success")
-//
-//                        if (success) { // 회원가입이 가능한다면
-//                            Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT)
-//                                .show()
-//                            val intent = Intent(this, LoginActivity::class.java)
-//                            startActivity(intent)
-//                            finish() //액티비티를 종료시킴(회원등록 창을 닫음)
-//
-//                        } else { // 회원가입이 안된다면
-//                            Toast.makeText(
-//                                this,
-//                                "회원가입에 실패했습니다. 다시 한 번 확인해 주세요.",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                            return@Listener
-//                        }
-//                    } catch (e: Exception) {
-//                        e.printStackTrace()
-//                    }
-//                }
-//
-//
-//            val registerRequest =
-//                RegisterRequest(
-//                    binding.editName.text.toString(),
-//                    binding.editId.text.toString(),
-//                    binding.editPw.text.toString(),
-//                    binding.editBirth.text.toString(),
-//                    responseListener
-//                )
-//            val queue = Volley.newRequestQueue(this)
-//            queue.add(registerRequest)
-
-            val responseLisener = Response.Listener<String> {response ->
+            if (isDataCheck) {
+                val responseLisener = Response.Listener<String> { response ->
 
                     try {
                         Log.w("asd", response)
-                        val jsonResponse : JSONObject = JSONObject(response)
+                        val jsonResponse: JSONObject = JSONObject(response)
 //                        val stringResponse = jsonResponse as String
                         val success: Boolean = jsonResponse.getBoolean("success")
                         if (success) { // 회원가입이 가능한다면
@@ -86,23 +54,31 @@ class RegisterActivity : AppCompatActivity() {
                             finish()
 
                         } else {// 회원가입이 안된다면
-                            Toast.makeText(this, "회원가입에 실패했습니다. 다시 한 번 확인해 주세요.", Toast.LENGTH_SHORT)
+                            Toast.makeText(
+                                this,
+                                "회원가입에 실패했습니다. 다시 한 번 확인해 주세요.",
+                                Toast.LENGTH_SHORT
+                            )
                                 .show();
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
 
-            }
+                }
 
-            val registerRequest = RegisterRequest(
-                            binding.editId.text.toString(),
-                            binding.editPw.text.toString(),
-                            binding.editName.text.toString(),
-                            binding.editBirth.text.toString(),
-                            responseLisener)
-            val queue = Volley.newRequestQueue(this)
-            queue.add(registerRequest)
+                val registerRequest = RegisterRequest(
+                    binding.editId.text.toString(),
+                    binding.editPw.text.toString(),
+                    binding.editName.text.toString(),
+                    binding.editBirth.text.toString(),
+                    responseLisener
+                )
+                val queue = Volley.newRequestQueue(this)
+                queue.add(registerRequest)
+            } else {
+                Toast.makeText(this, "개인정보수집에 동의해주십시오", Toast.LENGTH_SHORT).show()
+            }
 
 
 //            if (binding.editId.text.isEmpty() || binding.editPw.text.isEmpty() || binding.editPwRe.text.isEmpty()) {// 값이 전부 입력되지 않은경우
@@ -138,6 +114,7 @@ class RegisterActivity : AppCompatActivity() {
 //                startActivity(intent)
 //            }
         }
+
     }
 }
 
