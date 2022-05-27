@@ -3,13 +3,17 @@ package com.example.plantproject
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.example.plantproject.Login.RegisterIdCheck
 import com.example.plantproject.Login.RegisterRequest
 import com.example.plantproject.databinding.ActivityRegisterBinding
+import kotlinx.android.synthetic.main.activity_register.view.*
 import org.json.JSONObject
 
 
@@ -17,6 +21,7 @@ var isExistBlank = false
 var isPWSame = false
 var isExist = false
 var isDataCheck = false
+var isIdCheck = false
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var localDB: LocalDB
@@ -37,22 +42,43 @@ class RegisterActivity : AppCompatActivity() {
 
 //        localDB = LocalDB(this, DATABASE_NAME, null, DATABASE_VERSION) // SQLite 모듈 생성
 
+        binding.btnidcheck.setOnClickListener {
+            if (binding.editId.text.isNotEmpty()) {
+                idcheck()
+                if (isIdCheck) {
+                    binding.checkSuccess.visibility = View.VISIBLE
+                    binding.btnidcheck.visibility = View.INVISIBLE
+                } else {
+                    Toast.makeText(this, "아이디가 중복됩니다", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "아이디가 비어있습니다", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
         binding.btnRegister.setOnClickListener {
 
-            if (binding.editId.text.isEmpty() || binding.editPw.text.isEmpty() ||
-                binding.editPwRe.text.isEmpty() || binding.editName.text.isEmpty() ||
+            if (binding.editId.text.isEmpty() || binding.editPassword.text.isEmpty() ||
+                binding.editPasswordCheck.text.isEmpty() || binding.editName.text.isEmpty() ||
                 binding.editBirth.text.isEmpty()) {
                 Toast.makeText(this, "값을 전부 입력해주세요..", Toast.LENGTH_LONG).show()
             } else {
-                if (binding.editPw.text.toString().equals(binding.editPwRe.text.toString())) {
-                    if (isDataCheck) {
-                        login()
-                    } else{
-                        Toast.makeText(this, "개인정보수집에 동의해주십시오", Toast.LENGTH_SHORT).show()
-                    }
+                if(isIdCheck) {
+                    if (binding.editPassword.text.toString()
+                            .equals(binding.editPasswordCheck.text.toString())
+                    ) {
+                        if (isDataCheck) {
+                            register()
+                        } else {
+                            Toast.makeText(this, "개인정보수집에 동의해주십시오", Toast.LENGTH_SHORT).show()
+                        }
 
                     } else {
-                    Toast.makeText(this, "패스워드가 틀렸습니다.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "패스워드가 틀렸습니다.", Toast.LENGTH_LONG).show()
+                    }
+                }else {
+                    Toast.makeText(this, "아이디중복확인을 해주세요", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -133,7 +159,7 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun login() {
+    private fun register() {
         val responseLisener = Response.Listener<String> { response ->
 
             try {
@@ -164,9 +190,34 @@ class RegisterActivity : AppCompatActivity() {
 
         val registerRequest = RegisterRequest(
             binding.editId.text.toString(),
-            binding.editPw.text.toString(),
+            binding.editPassword.text.toString(),
             binding.editName.text.toString(),
             binding.editBirth.text.toString(),
+            responseLisener
+        )
+        val queue = Volley.newRequestQueue(this)
+        queue.add(registerRequest)
+    }
+
+    private fun idcheck() {
+
+        val responseLisener = Response.Listener<String> { response ->
+            try {
+
+                val jsonResponse = JSONObject(response)
+
+                val success: Boolean = jsonResponse.getBoolean("success")
+                isIdCheck = !success
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
+
+
+        val registerRequest = RegisterIdCheck(
+            binding.editId.text.toString(),
             responseLisener
         )
         val queue = Volley.newRequestQueue(this)
