@@ -1,6 +1,7 @@
 package com.example.plantproject
 
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -48,6 +49,8 @@ class RegisterActivity : AppCompatActivity() {
                 if (isIdCheck) {
                     binding.checkSuccess.visibility = View.VISIBLE
                     binding.btnidcheck.visibility = View.INVISIBLE
+                    binding.editId.isEnabled = false
+
                 } else {
                     Toast.makeText(this, "아이디가 중복됩니다", Toast.LENGTH_SHORT).show()
                 }
