@@ -1,6 +1,7 @@
 package com.example.plantproject
 
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -22,6 +23,7 @@ var isPWSame = false
 var isExist = false
 var isDataCheck = false
 var isIdCheck = false
+
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var localDB: LocalDB
@@ -45,12 +47,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnidcheck.setOnClickListener {
             if (binding.editId.text.isNotEmpty()) {
                 idcheck()
-                if (isIdCheck) {
-                    binding.checkSuccess.visibility = View.VISIBLE
-                    binding.btnidcheck.visibility = View.INVISIBLE
-                } else {
-                    Toast.makeText(this, "아이디가 중복됩니다", Toast.LENGTH_SHORT).show()
-                }
+
             } else {
                 Toast.makeText(this, "아이디가 비어있습니다", Toast.LENGTH_SHORT).show()
             }
@@ -200,21 +197,25 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun idcheck() {
-
         val responseLisener = Response.Listener<String> { response ->
             try {
-
                 val jsonResponse = JSONObject(response)
+                val success = jsonResponse.getBoolean("success")
+                isIdCheck = success
+                    if (success) {
+                        binding.checkSuccess.visibility = View.VISIBLE
+                        binding.btnidcheck.visibility = View.INVISIBLE
+                        binding.editId.isEnabled = false
 
-                val success: Boolean = jsonResponse.getBoolean("success")
-                isIdCheck = !success
+                    } else {
+                        Toast.makeText(this, "아이디가 중복됩니다", Toast.LENGTH_SHORT).show()
+                    }
 
             } catch (e: Exception) {
                 e.printStackTrace()
             }
 
         }
-
 
         val registerRequest = RegisterIdCheck(
             binding.editId.text.toString(),
