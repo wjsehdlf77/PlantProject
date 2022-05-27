@@ -155,6 +155,7 @@ class DetectActivity : AppCompatActivity() {
 
                     val intent = Intent(baseContext, DetectCheckActivity::class.java)
                     startActivity(intent)
+                    finish()
 
 
                 }
