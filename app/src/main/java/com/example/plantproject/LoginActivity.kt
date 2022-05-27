@@ -109,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
-            val loginRequest = LoginRequest(binding.editId.text.toString(), binding.editPw.text.toString(), responseListener)
+            val loginRequest = LoginRequest(binding.editLoginId.text.toString(), binding.editLoginPassword.text.toString(), responseListener)
             val queue = Volley.newRequestQueue(this)
             queue.add(loginRequest)
         }
@@ -124,5 +124,7 @@ class LoginActivity : AppCompatActivity() {
     private fun IntentRegister() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
+
+//        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 }
