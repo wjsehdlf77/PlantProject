@@ -78,11 +78,7 @@ class LocalDB (
             null,                   // having 조건
             null               // orderby 조건 지정
         )
-        if(cursor.count>0){//  반환된 cursor 값이 존재
-            return true;
-        }else{//반환된 cursor 값이 없음
-            return false;
-        }
+        return cursor.count>0
 
     }
     fun logIn(id: String, password:String): Boolean {
