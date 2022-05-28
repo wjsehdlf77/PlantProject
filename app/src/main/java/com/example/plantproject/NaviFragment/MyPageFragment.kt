@@ -8,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
 
-import com.example.plantproject.DetailFragment.DetectPlantFragment
 import com.example.plantproject.MainActivity
-import com.example.plantproject.DetailFragment.MyPlantFragment
-import com.example.plantproject.R
+
 import com.example.plantproject.databinding.FragmentMyPageBinding
 
 //마이페이지 프로필 수정
@@ -36,42 +34,6 @@ class MyPageFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState : Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-
-        binding.btnMyPlant.setOnClickListener {
-
-            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_bottom)
-            fragmentTransaction.replace(R.id.main_section_layout, MyPlantFragment())
-            fragmentTransaction.commit()
-
-
-
-
-
-        }
-
-        binding.btnWhat.setOnClickListener {
-
-            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_bottom)
-            fragmentTransaction.replace(R.id.main_section_layout, DetectPlantFragment()).commitAllowingStateLoss()
-
-
-
-
-        }
-
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-
-    }
 
 
 }

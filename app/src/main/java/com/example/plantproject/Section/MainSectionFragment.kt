@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.plantproject.DetailActivity.DetectActivity
 import com.example.plantproject.DetailActivity.DiaryActivity
 import com.example.plantproject.DetailActivity.MyPlantActivity
-import com.example.plantproject.DetailFragment.DetailDiaryFragment
+
 import com.example.plantproject.MainActivity
 import com.example.plantproject.NaviFragment.HomeFragment
 import com.example.plantproject.NaviFragment.MyPageFragment

@@ -84,6 +84,14 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
 
+            if (binding.editLoginId.text.toString() == "admin"){
+                if (binding.editLoginPassword.text.toString() == "1234"){
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+
 
             val responseListener: Response.Listener<String> =
                 Response.Listener { response ->
@@ -126,6 +134,6 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
 
-//        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 }
