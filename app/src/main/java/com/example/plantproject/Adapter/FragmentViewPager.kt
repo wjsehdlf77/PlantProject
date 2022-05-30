@@ -4,9 +4,6 @@ package com.example.plantproject.Adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.plantproject.NaviFragment.HomeFragment
-import com.example.plantproject.NaviFragment.Main2Fragment
-import com.example.plantproject.NaviFragment.MyPageFragment
 import com.example.plantproject.Section.MainSectionFragment
 import com.example.plantproject.Section.ProfileSectionFragment
 
