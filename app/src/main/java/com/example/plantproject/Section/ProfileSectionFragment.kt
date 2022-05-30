@@ -42,6 +42,13 @@ class ProfileSectionFragment : Fragment() {
 
         binding.sensorGraph.loadUrl("https://www.naver.com")
 
+        binding.waterGraph.apply {
+            webViewClient = WebViewClient()
+            settings.javaScriptEnabled = true
+        }
+
+        binding.waterGraph.loadUrl("https://www.google.com")
+
         binding.btnTemp.setOnClickListener {
             binding.sensorGraph.apply {
                 webViewClient = WebViewClient()
