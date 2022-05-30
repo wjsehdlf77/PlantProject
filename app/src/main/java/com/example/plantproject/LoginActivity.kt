@@ -84,6 +84,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
 
+            //개발용 아이디 admin, 1234
             if (binding.editLoginId.text.toString() == "admin"){
                 if (binding.editLoginPassword.text.toString() == "1234"){
                     val intent = Intent(this, MainActivity::class.java)

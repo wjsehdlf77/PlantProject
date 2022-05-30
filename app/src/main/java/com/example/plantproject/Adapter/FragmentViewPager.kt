@@ -24,6 +24,8 @@ class FragmentViewPager(fragmentActivity: FragmentActivity): FragmentStateAdapte
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
+        val main = "내 식물 관리"
+        val sub = "관리현황"
         return when(position) {
             0 -> MainSectionFragment()
             else -> ProfileSectionFragment()
