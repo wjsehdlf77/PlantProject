@@ -39,7 +39,7 @@ open class HomeFragment : Fragment() {
 
         val resources = this.resources
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_leaf_main)
-        binding.imageView.setImageBitmap(bitmap)
+//        binding.imageView.setImageBitmap(bitmap)
     }
 
 }
