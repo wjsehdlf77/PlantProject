@@ -37,9 +37,9 @@ open class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_leaf_main)
-        binding.imageView.setImageBitmap(bitmap)
+//        val resources = this.resources
+//        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_leaf_main)
+//        binding.picamera.setImageBitmap(bitmap) drawable -> bitmap
     }
 
 }
