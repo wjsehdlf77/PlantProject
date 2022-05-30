@@ -4,11 +4,11 @@
     <item
         android:id="@+id/action_viewpager_home"
         android:enabled="true"
-        android:title="홈"/>
+        android:title="식물 관리"/>
 
     <item
         android:id="@+id/action_viewpager_cummunity"
         android:enabled="true"
-        android:title="커뮤니티"/>
+        android:title="관리 현황"/>
 
 </menu>

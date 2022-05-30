@@ -4,21 +4,26 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.viewpager2.widget.ViewPager2
 
 
 import com.example.plantproject.Adapter.FragmentViewPager
 import com.example.plantproject.DetailActivity.DetectActivity
 import com.example.plantproject.NaviFragment.HomeFragment
 import com.example.plantproject.NaviFragment.MyPageFragment
+import com.example.plantproject.Section.MainSectionFragment
+import com.example.plantproject.Section.ProfileSectionFragment
 
 import com.example.plantproject.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),  BottomNavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
 
     var mBackWait:Long = 0
@@ -32,8 +37,21 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.pager.adapter = FragmentViewPager(this)
+         val page = FragmentViewPager(this)
+         binding.pager.adapter = page
 
+        binding.pager.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    binding.mainTopNavi.menu.getItem(position).isChecked = true
+                }
+            }
+        )
+
+        // 리스너 연결
+        binding.mainTopNavi.setOnNavigationItemSelectedListener(this)
 
     }
 
@@ -52,6 +70,24 @@ class MainActivity : AppCompatActivity() {
             finish() //액티비티 종료
         }
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_viewpager_home -> {
+                // ViewPager의 현재 item에 첫 번째 화면을 대입
+                binding.pager.currentItem = 0
+                return true
+            }
+            R.id.action_viewpager_cummunity -> {
+                // ViewPager의 현재 item에 두 번째 화면을 대입
+                binding.pager.currentItem = 1
+                return true
+            }else -> {
+                return false
+            }
+        }
+    }
+
 
 }
 
