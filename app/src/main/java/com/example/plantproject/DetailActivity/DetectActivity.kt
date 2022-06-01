@@ -18,6 +18,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.plantproject.MainActivity
 import com.example.plantproject.databinding.ActivityDetectBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -58,6 +59,12 @@ class DetectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetectBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        binding.btnLater.setOnClickListener {
+            val intent = Intent(baseContext, MainActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
@@ -153,7 +160,7 @@ class DetectActivity : AppCompatActivity() {
 //                    val msg = "Photo capture succeeded: ${output.savedUri}"
 //                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
 
-                    val intent = Intent(baseContext, DetectCheckActivity::class.java)
+                    val intent = Intent(baseContext, MainActivity::class.java)
                     startActivity(intent)
                     finish()
 

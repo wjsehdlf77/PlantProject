@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.example.plantproject.DetailActivity.DetectActivity
 import com.example.plantproject.Login.LoginRequest
 import com.example.plantproject.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*
@@ -104,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
                                 .show()
                             val userID = jsonResponse.getString("userID")
                             val userPassword = jsonResponse.getString("userPassword")
-                            val intent = Intent(this, MainActivity::class.java)
+                            val intent = Intent(this, DetectActivity::class.java)
                             // 로그인 하면서 사용자 정보 넘기기
                             intent.putExtra("userID", userID)
                             intent.putExtra("userPassword", userPassword)
