@@ -25,28 +25,6 @@ import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-//class DetectActivity : AppCompatActivity() {
-//
-//
-//
-//    private lateinit var binding: ActivityDetectBinding
-//    private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
-//
-////    private lateinit var filePath: String
-////    private lateinit var bitmapSource : Bitmap
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        binding = ActivityDetectBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//
-//        cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-//
-//        cameraProviderFuture.addListener(Runnable {
-//            val cameraProvider = cameraProviderFuture.get()
-//            bindPreview(cameraProvider)
-//        }, ContextCompat.getMainExecutor(this))
 
 class DetectActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetectBinding
