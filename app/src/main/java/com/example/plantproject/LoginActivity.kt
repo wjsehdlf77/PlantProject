@@ -30,7 +30,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+
 import com.example.plantproject.Login.LoginService
+
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -58,10 +60,13 @@ class LoginActivity : AppCompatActivity() {
             var id = editLoginId.text.toString()
             var pw = editLoginPassword.text.toString()
 
+
             loginService.requestLogin(id,pw)?.enqueue(object: Callback<ResponseBody?>{
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                     Log.d(ContentValues.TAG, "Fail msg : " + t.message)
+
                 }
+
 
                 override fun onResponse(
                     call: Call<ResponseBody?>,
@@ -81,6 +86,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, "없는 계정입니다.", Toast.LENGTH_SHORT).show()
                         Log.d(ContentValues.TAG, response.errorBody().toString())
                         Log.d(ContentValues.TAG, call.request().body().toString())
+
                     }
                 }
             })

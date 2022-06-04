@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailFragment.DetectPlantFragment">
+    tools:context=".DetailActivity.DetectActivity">
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="0dp"
         android:layout_height="500dp"
+
+        android:layout_marginTop="150dp"
+
         android:layout_marginBottom="232dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,33 +24,55 @@
             android:id="@+id/previewView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter" />
     </FrameLayout>
 
     <Button
         android:id="@+id/imageCapture"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginStart="76dp"
         android:background="@drawable/btn_effect"
         android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gallaryBtn"
         app:layout_constraintTop_toBottomOf="@+id/container"
-        app:layout_constraintVertical_bias="0.495" />
+        app:layout_constraintVertical_bias="0.473" />
 
     <Button
         android:id="@+id/gallaryBtn"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="50dp"
         android:background="@drawable/btn_effect_small"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container"
         app:layout_constraintVertical_bias="0.486" />
+
+    <TextView
+
+        android:id="@+id/profileDetect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대표 식물 설정"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLater"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_effect_register"
+        android:text="다음에 설정하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.72"
+        app:layout_constraintStart_toEndOf="@+id/imageCapture"
+        app:layout_constraintTop_toBottomOf="@+id/container" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,8 +8,12 @@
 
 
     <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +23,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlantProject"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".AddRegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"></activity>
+
         <activity
             android:name=".DetailActivity.DetectCheckActivity"
             android:exported="false" />
@@ -57,8 +81,10 @@
             android:exported="false"/>
         <activity
             android:name=".MainActivity"
+
             android:exported="false">
         </activity>
+
     </application>
 
 </manifest>

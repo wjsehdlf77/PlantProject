@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
 import com.example.plantproject.MainActivity
 import com.example.plantproject.databinding.FragmentProfileSectionBinding
 
@@ -29,6 +30,52 @@ class ProfileSectionFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileSectionBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.sensorGraph.apply {
+            webViewClient = WebViewClient()
+            settings.javaScriptEnabled = true
+        }
+
+        binding.sensorGraph.loadUrl("https://www.naver.com")
+
+        binding.waterGraph.apply {
+            webViewClient = WebViewClient()
+            settings.javaScriptEnabled = true
+        }
+
+        binding.waterGraph.loadUrl("https://www.google.com")
+
+        binding.btnTemp.setOnClickListener {
+            binding.sensorGraph.apply {
+                webViewClient = WebViewClient()
+                settings.javaScriptEnabled = true
+            }
+
+            binding.sensorGraph.loadUrl("https://www.naver.com")
+
+        }
+
+        binding.btnHum.setOnClickListener {
+            binding.sensorGraph.apply {
+                webViewClient = WebViewClient()
+                settings.javaScriptEnabled = true
+            }
+
+            binding.sensorGraph.loadUrl("https://www.daum.net")
+        }
+
+        binding.btnLight.setOnClickListener {
+            binding.sensorGraph.apply {
+                webViewClient = WebViewClient()
+                settings.javaScriptEnabled = true
+            }
+
+            binding.sensorGraph.loadUrl("https://www.google.com")
+        }
     }
 
     override fun onDestroy() {

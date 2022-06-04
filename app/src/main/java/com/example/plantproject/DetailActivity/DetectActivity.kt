@@ -18,34 +18,13 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.plantproject.MainActivity
 import com.example.plantproject.databinding.ActivityDetectBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-//class DetectActivity : AppCompatActivity() {
-//
-//
-//
-//    private lateinit var binding: ActivityDetectBinding
-//    private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
-//
-////    private lateinit var filePath: String
-////    private lateinit var bitmapSource : Bitmap
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        binding = ActivityDetectBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//
-//        cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-//
-//        cameraProviderFuture.addListener(Runnable {
-//            val cameraProvider = cameraProviderFuture.get()
-//            bindPreview(cameraProvider)
-//        }, ContextCompat.getMainExecutor(this))
 
 class DetectActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetectBinding
@@ -58,6 +37,12 @@ class DetectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetectBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        binding.btnLater.setOnClickListener {
+            val intent = Intent(baseContext, MainActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
@@ -153,7 +138,7 @@ class DetectActivity : AppCompatActivity() {
 //                    val msg = "Photo capture succeeded: ${output.savedUri}"
 //                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
 
-                    val intent = Intent(baseContext, DetectCheckActivity::class.java)
+                    val intent = Intent(baseContext, MainActivity::class.java)
                     startActivity(intent)
                     finish()
 
