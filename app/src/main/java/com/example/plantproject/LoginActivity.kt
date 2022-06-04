@@ -28,10 +28,19 @@ import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 
 import com.example.plantproject.Login.LoginService
+import com.example.plantproject.databinding.ActivityLoginBinding
+import com.example.plantproject.databinding.ActivityMainBinding
 
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.ResponseBody
@@ -41,58 +50,78 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
+
 class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val spannable = SpannableStringBuilder("아이디가 없으시면 이곳에서 회원가입 해주시기 바랍니다.")
+        binding.textView5.setText(spannable, TextView.BufferType.SPANNABLE)
+
+        val spannableText = binding.textView5.text as Spannable
+
+        spannableText.setSpan(object : ClickableSpan() {
+            override fun onClick(p0: View) {
+                IntentRegister()
+            }
+        }, 15, 20, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+        binding.textView5.movementMethod = LinkMovementMethod.getInstance()
+
+
+
 
         var retrofit = Retrofit.Builder()
-            .baseUrl("http://172.30.1.14:8000")
+            .baseUrl("http://192.168.0.4:8000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         var loginService: LoginService = retrofit.create(LoginService::class.java)
 
-        btn_add.setOnClickListener {
-            val intent = Intent(applicationContext, RegisterActivity::class.java)
-            startActivity(intent)
-        }
-        btn_login.setOnClickListener{
-            var id = editLoginId.text.toString()
-            var pw = editLoginPassword.text.toString()
+        btn_login.setOnClickListener {
+            var id = binding.editLoginId.text.toString()
+            var pw = binding.editLoginPassword.text.toString()
 
 
-            loginService.requestLogin(id,pw)?.enqueue(object: Callback<ResponseBody?>{
+
+
+            loginService.requestLogin(id, pw)?.enqueue(object : Callback<ResponseBody?> {
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                    Log.d(ContentValues.TAG, "Fail msg : " + t.message)
-
                 }
-
-
                 override fun onResponse(
                     call: Call<ResponseBody?>,
                     response: Response<ResponseBody?>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d(ContentValues.TAG, "계정 확인 완료$response")
                         Toast.makeText(applicationContext, "로그인이 됐습니다.", Toast.LENGTH_SHORT).show()
+                        IntentMainActivity(id)
 
-                        //                   로그인. Main Activity2 를 호출한다. (갤러리와 이미지 처리 버튼이 나오는 부분이다)
-                        //                     text view 내의 값들이 db에 있는 경우
-                        val intent = Intent(applicationContext, MainActivity::class.java)
-                        intent.putExtra("Key_id",id)
-                        startActivity(intent)
                     } else {
-                        Log.d(ContentValues.TAG, "오류 : " + response.code())
-                        Toast.makeText(applicationContext, "없는 계정입니다.", Toast.LENGTH_SHORT).show()
-                        Log.d(ContentValues.TAG, response.errorBody().toString())
-                        Log.d(ContentValues.TAG, call.request().body().toString())
+                        Toast.makeText(applicationContext, "아이디나 비밀번호가 틀렸습니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show()
 
                     }
                 }
             })
         }
     }
+
+    private fun IntentRegister() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
+
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+    private fun IntentMainActivity(id: String) {
+        val intent = Intent(applicationContext, MainActivity::class.java)
+        intent.putExtra("Key_id", id)
+        startActivity(intent)
+        finish()
+    }
 }
+
+
 //class LoginActivity : AppCompatActivity() {
 //    val DATABASE_VERSION = 1
 //    val DATABASE_NAME = "LocalDB.db"
@@ -199,11 +228,5 @@ class LoginActivity : AppCompatActivity() {
 //
 //    }
 //
-//    private fun IntentRegister() {
-//        val intent = Intent(this, RegisterActivity::class.java)
-//        startActivity(intent)
-//
-//        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-//    }
 //}
 

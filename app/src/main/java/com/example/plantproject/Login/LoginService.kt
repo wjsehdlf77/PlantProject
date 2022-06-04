@@ -11,10 +11,10 @@ interface LoginService {
     @Multipart
     @POST("/register/")
     fun register(
-        @Part("id") param1: RequestBody?,
-        @Part("pw") param2: RequestBody?,
-        @Part("name") param3: RequestBody?,
-        @Part("birth") param4: RequestBody?
+        @Part("userid") param1: RequestBody?,
+        @Part("userpassword") param2: RequestBody?,
+        @Part("username") param3: RequestBody?,
+        @Part("userbirth") param4: RequestBody?
     ): Call<ResponseBody?>?
 
     @FormUrlEncoded
@@ -22,5 +22,11 @@ interface LoginService {
     fun requestLogin(
         @Field("id") id:String,
         @Field("pw") pw:String
+    ) : Call<ResponseBody?>?
+
+    @FormUrlEncoded
+    @POST("/checkid/")
+    fun requestIdCheck(
+        @Field("idcheck") checkid :String
     ) : Call<ResponseBody?>?
 }
