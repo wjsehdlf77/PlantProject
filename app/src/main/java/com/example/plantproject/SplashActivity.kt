@@ -16,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
 
         // Actionbar 제거
         supportActionBar?.hide()
-        Glide.with(this).load(R.drawable.splash).into(imageView6);
+        Glide.with(this).load(R.drawable.ic_leaf_main).into(imageView6);
 
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed(Runnable {
@@ -24,6 +24,6 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(this)
                 finish()
             }
-        }, 3000)
+        }, 1000)
     }
 }

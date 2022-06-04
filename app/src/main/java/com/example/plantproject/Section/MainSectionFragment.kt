@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.plantproject.DetailActivity.DetectActivity
 import com.example.plantproject.DetailActivity.DiaryActivity
 import com.example.plantproject.DetailActivity.MyPlantActivity
-import com.example.plantproject.DetailFragment.DetailDiaryFragment
+
 import com.example.plantproject.MainActivity
 import com.example.plantproject.NaviFragment.HomeFragment
 import com.example.plantproject.NaviFragment.MyPageFragment
@@ -21,13 +21,13 @@ import com.example.plantproject.databinding.FragmentMainSectionBinding
 
 
 class MainSectionFragment : Fragment() {
+
     private var _binding: FragmentMainSectionBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var mainActivity: MainActivity
 
     private var isFabOpen = false
-
 
 
 
@@ -77,6 +77,7 @@ class MainSectionFragment : Fragment() {
             startActivity(intent)
 
         }
+
 
 
 

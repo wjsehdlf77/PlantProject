@@ -5,12 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 
 
 import com.example.plantproject.Adapter.FragmentViewPager
 import com.example.plantproject.DetailActivity.DetectActivity
 import com.example.plantproject.NaviFragment.HomeFragment
+import com.example.plantproject.NaviFragment.MyPageFragment
 
 import com.example.plantproject.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
@@ -20,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     var mBackWait:Long = 0
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +35,12 @@ class MainActivity : AppCompatActivity() {
         binding.pager.adapter = FragmentViewPager(this)
 
 
-
     }
+
+
+
+
+
 
     override fun onBackPressed() {
         // 뒤로가기 버튼 클릭
