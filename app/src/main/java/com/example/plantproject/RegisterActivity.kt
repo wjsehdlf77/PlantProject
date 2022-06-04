@@ -23,6 +23,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plantproject.Login.LoginService
@@ -38,35 +39,79 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+var isIdCheck = false
 
 class RegisterActivity : AppCompatActivity() {
+
+
+    private lateinit var binding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
 
-        btnidcheck.setOnClickListener {
-            Toast.makeText(this,"값을 모두 채워주세요",Toast.LENGTH_LONG).show()
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        var retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.0.4:8000")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        var loginService: LoginService = retrofit.create(LoginService::class.java)
+
+
+
+        binding.btnidcheck.setOnClickListener {
+            if (binding.editId.text.isNotEmpty()) {
+                loginService.requestIdCheck(binding.editId.text.toString())
+                    ?.enqueue(object : Callback<ResponseBody?> {
+                        override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+
+                        }
+
+                        override fun onResponse(
+                            call: Call<ResponseBody?>,
+                            response: Response<ResponseBody?>
+                        ) {
+                            if (response.isSuccessful) {
+                                isIdCheck = true
+                                binding.checkSuccess.visibility = View.VISIBLE
+                                binding.btnidcheck.visibility = View.INVISIBLE
+                                binding.editId.isEnabled = false
+                            } else {
+                                Toast.makeText(baseContext, "아이디가 중복됩니다", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    })
+            }else {
+                Toast.makeText(baseContext,"아이디칸이 비어있습니다", Toast.LENGTH_SHORT).show()
+            }
         }
 
         btn_register.setOnClickListener {
-            var id = editId.text.toString()
-            var pw = editPassword.text.toString()
-            var pw_re = editPasswordCheck.text.toString()
-            var name = editName.text.toString()
-            var birth = editBirth.text.toString()
 
-
-            if(id.isEmpty() || pw.isEmpty() || pw_re.isEmpty() || name.isEmpty() || birth.isEmpty())
-                Toast.makeText(this,"값을 모두 채워주세요",Toast.LENGTH_LONG).show()
-                if (pw == pw_re)
-                    if(agreedata.isChecked)
-                        registerAccount(id,pw,name,birth)
-                    else
-                        Toast.makeText(this,"회원정보 수집에 동의해주세요",Toast.LENGTH_LONG).show()
-                else
-                    Toast.makeText(this,"비밀번호가 같지 않습니다.",Toast.LENGTH_LONG).show()
+            if (binding.editId.text.toString().isEmpty() || binding.editPassword.text.toString().isEmpty() ||
+                binding.editPasswordCheck.text.toString().isEmpty() || binding.editName.text.toString().isEmpty() ||
+                binding.editBirth.text.toString().isEmpty()) {
+                Toast.makeText(this, "값을 모두 채워주세요", Toast.LENGTH_LONG).show()
+            } else {
+                if (isIdCheck) {
+                    if (binding.editPassword.text.toString() == binding.editPasswordCheck.text.toString()) {
+                        if (binding.agreedata.isChecked) {
+                            registerAccount(binding.editId.text.toString(),binding.editPassword.text.toString(),
+                                binding.editName.text.toString(),binding.editBirth.text.toString())
+                        } else {
+                            Toast.makeText(this, "회원정보 수집에 동의해주세요", Toast.LENGTH_LONG).show()
+                    }
+                    }else{
+                        Toast.makeText(this, "비밀번호가 같지 않습니다.", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Toast.makeText(baseContext, "아이디 중복 확인을 해주세요", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
+
+
 
     private fun registerAccount(userId: String, userPass: String, userName: String, userBirth:String) {
         val identify = RequestBody.create(MediaType.parse("text/plain"), userId)
@@ -77,42 +122,35 @@ class RegisterActivity : AppCompatActivity() {
 
         // Retrofit 객체 생성
         val builder2 = Retrofit.Builder()
-            .baseUrl("http://172.30.1.14:8000")
+            .baseUrl("http://192.168.0.4:8000")
             .addConverterFactory(GsonConverterFactory.create())
         val retrofit2 = builder2.build()
         val myAPI2: LoginService = retrofit2.create(LoginService::class.java)
 
-        // post 한다는 request를 보내는 부분.
-        // 만약 서버로 부터 response를 받는다면.
         myAPI2.register(identify, password,name, birth)?.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(
                 call: Call<ResponseBody?>,
                 response: Response<ResponseBody?>
             ) {
                 if (response.isSuccessful) {
-                    Log.d(TAG, "계정 등록")
-                    Toast.makeText(this@RegisterActivity,
+                    Toast.makeText(baseContext,
                         "계정 등록에 성공하였습니다!",
                         Toast.LENGTH_SHORT
                     ).show()
-                    Log.d("body", "${response.body()}")
-                    val intent = Intent(applicationContext, LoginActivity::class.java)
+                    val intent = Intent(baseContext, LoginActivity::class.java)
                     startActivity(intent)
                 } else {
-                   Toast.makeText(this@RegisterActivity,
-                        "아이디가 중복됩니다.",
+                    Toast.makeText(baseContext,
+                        "서버에 안들어감",
                         Toast.LENGTH_SHORT
                     ).show()
-                    Log.d(TAG, "Post Status Code : " + response.code())
-                    Log.d(TAG, response.errorBody().toString())
-                    Log.d(TAG, call.request().body().toString())
+
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                Log.d(TAG, "Fail msg : " + t.message)
             }
-       })
+        })
     }
 
 }

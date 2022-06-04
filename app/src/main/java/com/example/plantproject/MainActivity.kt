@@ -1,26 +1,18 @@
 package com.example.plantproject
 
-import android.animation.ObjectAnimator
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+
 import androidx.viewpager2.widget.ViewPager2
 
 
 import com.example.plantproject.Adapter.FragmentViewPager
-import com.example.plantproject.DetailActivity.DetectActivity
-import com.example.plantproject.NaviFragment.HomeFragment
-import com.example.plantproject.NaviFragment.MyPageFragment
-import com.example.plantproject.Section.MainSectionFragment
-import com.example.plantproject.Section.ProfileSectionFragment
-
 import com.example.plantproject.databinding.ActivityMainBinding
+
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
+
 
 
 class MainActivity : AppCompatActivity(),  BottomNavigationView.OnNavigationItemSelectedListener {
@@ -54,10 +46,6 @@ class MainActivity : AppCompatActivity(),  BottomNavigationView.OnNavigationItem
         binding.mainTopNavi.setOnNavigationItemSelectedListener(this)
 
     }
-
-
-
-
 
 
     override fun onBackPressed() {
