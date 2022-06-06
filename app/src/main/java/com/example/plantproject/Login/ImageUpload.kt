@@ -14,6 +14,6 @@ interface ImageUpload {
     @POST("/profileimage/")
     fun requestBitmap(
         @Part("user") user: RequestBody?,
-        @Part userImage : MultipartBody.Part
+        @Part userimage : MultipartBody.Part
     ): Call<ResponseBody?>
 }

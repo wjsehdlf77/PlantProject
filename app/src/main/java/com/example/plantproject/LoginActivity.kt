@@ -101,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, "로그인이 됐습니다.", Toast.LENGTH_SHORT).show()
                         IntentMainActivity(id)
 
+
                     } else {
                         Toast.makeText(applicationContext, "아이디나 비밀번호가 틀렸습니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show()
 
@@ -121,6 +122,11 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra("Key_id", id)
         startActivity(intent)
         finish()
+    }
+
+    private fun IntentRegisterActivity(id: String) {
+        val intent = Intent(applicationContext, MainActivity::class.java)
+        startActivity(intent)
     }
 }
 
