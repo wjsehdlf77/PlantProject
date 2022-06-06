@@ -11,6 +11,7 @@ import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.FileUtils
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
@@ -24,8 +25,10 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
 import com.example.plantproject.Login.ImageUpload
 import com.example.plantproject.Login.LoginService
+import com.example.plantproject.LoginActivity
 import com.example.plantproject.MainActivity
 import com.example.plantproject.databinding.ActivityDetectBinding
 import com.google.gson.Gson
@@ -62,8 +65,7 @@ class DetectActivity : AppCompatActivity() {
 
 
             binding.btnLater.setOnClickListener {
-            val intent = Intent(baseContext, MainActivity::class.java)
-            startActivity(intent)
+            intentLoginActivity()
         }
 
 
@@ -88,27 +90,8 @@ class DetectActivity : AppCompatActivity() {
         {
             try {
                 val uri = it.data!!.data!!
+                UritoBitmap(uri)
 
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    val source = ImageDecoder.createSource(contentResolver, uri)
-                    ImageDecoder.decodeBitmap(source)?.let {
-                        val bitmap = resizeBitmap(it, 900f, 0f)
-//                        val intent = Intent(baseContext, MainActivity::class.java)
-                        val file = createFileFromBitmap(bitmap)
-                        testRetrofit(file)
-
-                        startActivity(intent)
-//                        bitmapSource = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-//                        binding.imageView3.setImageBitmap(bitmapSource)
-
-                    }
-                } else {
-                    MediaStore.Images.Media.getBitmap(contentResolver, uri)?.let {
-                        val bitmap = resizeBitmap(it, 900f, 0f)
-
-                    }
-                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -127,13 +110,42 @@ class DetectActivity : AppCompatActivity() {
 
     }
 
+    private fun intentLoginActivity() {
+        val intent = Intent(baseContext, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
-    private fun testRetrofit(file: File){
-        binding.testid.text = file.toString()
+    private fun UritoBitmap(uri: Uri) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val source = ImageDecoder.createSource(contentResolver, uri)
+            ImageDecoder.decodeBitmap(source)?.let {
+                val bitmap = resizeBitmap(it, 900f, 0f)
+                val file = createFileFromBitmap(bitmap)
+                ImageRetrofit(file)
+
+                intentLoginActivity()
+
+
+
+            }
+        } else {
+            MediaStore.Images.Media.getBitmap(contentResolver, uri)?.let {
+                val bitmap = resizeBitmap(it, 900f, 0f)
+                val file = createFileFromBitmap(bitmap)
+                ImageRetrofit(file)
+                intentLoginActivity()
+            }
+        }
+
+}
+    private fun ImageRetrofit(file: File){
+
         val userId : String? = intent.getStringExtra("Key_id")
 
         var requestBody : RequestBody = RequestBody.create(MediaType.parse("image/*"),file)
-        var body : MultipartBody.Part = MultipartBody.Part.createFormData("picture",file.name,requestBody)
+
+        var body : MultipartBody.Part = MultipartBody.Part.createFormData("userimage",file.name,requestBody)
 
         val identify = RequestBody.create(MediaType.parse("text/plain"),userId!!)
 
@@ -153,7 +165,7 @@ class DetectActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(baseContext, "File Uploaded Successfully...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(baseContext, "프로필사진등록하셔습니다", Toast.LENGTH_LONG).show();
                     Log.d("레트로핏 결과2",""+response?.body().toString())
                 } else {
                     Toast.makeText(baseContext, "Some error occurred...", Toast.LENGTH_LONG).show();
@@ -200,20 +212,8 @@ class DetectActivity : AppCompatActivity() {
                 @RequiresApi(Build.VERSION_CODES.P)
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
 
-                    val source = ImageDecoder.createSource(contentResolver, output.savedUri!!)
-
-                    ImageDecoder.decodeBitmap(source)?.let {
-                        val bitmap = resizeBitmap(it, 900f, 0f)
-                        val imageFile: File = createFileFromBitmap(bitmap)
-                        testRetrofit(imageFile)
-                    }
-
-//                    Toast.makeText(baseContext, "사진", Toast.LENGTH_SHORT).show()
-
-//                    val intent = Intent(baseContext, MainActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-
+                    val uri = output.savedUri
+                    UritoBitmap(uri!!)
 
                 }
             }
@@ -222,18 +222,18 @@ class DetectActivity : AppCompatActivity() {
 
     @Throws(IOException::class)
     private fun createFileFromBitmap(bitmap: Bitmap): File {
-        val newFile = File(applicationContext.filesDir, "picture")
+        val newFile = File(applicationContext.filesDir, makeImageFileName())
         val out = FileOutputStream(newFile)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
         return newFile
     }
 
-//    private fun makeImageFileName(): String? {
-//        val simpleDateFormat = SimpleDateFormat("yyyyMMdd_hhmmss")
-//        val date = Date()
-//        val strDate = simpleDateFormat.format(date)
-//        return "$strDate.png"
-//    }
+    private fun makeImageFileName(): String? {
+        val simpleDateFormat = SimpleDateFormat("yyyyMMdd_hhmmss")
+        val date = Date()
+        val strDate = simpleDateFormat.format(date)
+        return "$strDate.jpeg"
+    }
 
 
     private fun startCamera() {
