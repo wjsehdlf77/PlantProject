@@ -1,25 +1,47 @@
 package com.example.plantproject.DetailActivity
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.graphics.Matrix
+import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.*
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.plantproject.Login.ImageUpload
+import com.example.plantproject.Login.LoginService
 import com.example.plantproject.MainActivity
 import com.example.plantproject.databinding.ActivityDetectBinding
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -39,7 +61,7 @@ class DetectActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.btnLater.setOnClickListener {
+            binding.btnLater.setOnClickListener {
             val intent = Intent(baseContext, MainActivity::class.java)
             startActivity(intent)
         }
@@ -66,11 +88,15 @@ class DetectActivity : AppCompatActivity() {
         {
             try {
                 val uri = it.data!!.data!!
+
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     val source = ImageDecoder.createSource(contentResolver, uri)
                     ImageDecoder.decodeBitmap(source)?.let {
                         val bitmap = resizeBitmap(it, 900f, 0f)
-                        val intent = Intent(baseContext, DetectCheckActivity::class.java)
+//                        val intent = Intent(baseContext, MainActivity::class.java)
+                        val file = createFileFromBitmap(bitmap)
+                        testRetrofit(file)
 
                         startActivity(intent)
 //                        bitmapSource = bitmap.copy(Bitmap.Config.ARGB_8888, true)
@@ -99,6 +125,43 @@ class DetectActivity : AppCompatActivity() {
             requestGalleryLauncher.launch(intent)
         }
 
+    }
+
+
+    private fun testRetrofit(file: File){
+        binding.testid.text = file.toString()
+        val userId : String? = intent.getStringExtra("Key_id")
+
+        var requestBody : RequestBody = RequestBody.create(MediaType.parse("image/*"),file)
+        var body : MultipartBody.Part = MultipartBody.Part.createFormData("picture",file.name,requestBody)
+
+        val identify = RequestBody.create(MediaType.parse("text/plain"),userId!!)
+
+        //The gson builder
+        val builder2 = Retrofit.Builder()
+            .baseUrl("http://192.168.0.4:8000")
+            .addConverterFactory(GsonConverterFactory.create())
+        val retrofit2 = builder2.build()
+
+        var imageUpload:ImageUpload = retrofit2.create(ImageUpload::class.java)
+
+
+        imageUpload.requestBitmap(identify, body)?.enqueue(object : Callback<ResponseBody?>{
+            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+
+            }
+
+            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(baseContext, "File Uploaded Successfully...", Toast.LENGTH_LONG).show();
+                    Log.d("레트로핏 결과2",""+response?.body().toString())
+                } else {
+                    Toast.makeText(baseContext, "Some error occurred...", Toast.LENGTH_LONG).show();
+                    Log.d("레트로핏 결과2",""+response?.body().toString())
+                }
+            }
+
+        })
     }
 
     private fun takePhoto() {
@@ -134,19 +197,43 @@ class DetectActivity : AppCompatActivity() {
                     Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
                 }
 
+                @RequiresApi(Build.VERSION_CODES.P)
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-//                    val msg = "Photo capture succeeded: ${output.savedUri}"
-//                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
 
-                    val intent = Intent(baseContext, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    val source = ImageDecoder.createSource(contentResolver, output.savedUri!!)
+
+                    ImageDecoder.decodeBitmap(source)?.let {
+                        val bitmap = resizeBitmap(it, 900f, 0f)
+                        val imageFile: File = createFileFromBitmap(bitmap)
+                        testRetrofit(imageFile)
+                    }
+
+//                    Toast.makeText(baseContext, "사진", Toast.LENGTH_SHORT).show()
+
+//                    val intent = Intent(baseContext, MainActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
 
 
                 }
             }
         )
     }
+
+    @Throws(IOException::class)
+    private fun createFileFromBitmap(bitmap: Bitmap): File {
+        val newFile = File(applicationContext.filesDir, "picture")
+        val out = FileOutputStream(newFile)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+        return newFile
+    }
+
+//    private fun makeImageFileName(): String? {
+//        val simpleDateFormat = SimpleDateFormat("yyyyMMdd_hhmmss")
+//        val date = Date()
+//        val strDate = simpleDateFormat.format(date)
+//        return "$strDate.png"
+//    }
 
 
     private fun startCamera() {
@@ -226,6 +313,20 @@ class DetectActivity : AppCompatActivity() {
             }
         }
     }
+
+//    private fun createPhotoFile(): File? {
+//        val name = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+//        val storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+//        var image: File? = null
+//
+//        try {
+//            image = File.createTempFile(name, ".jpg", storageDir)
+//        } catch (e: IOException) {
+//            print(e)
+//        }
+//        return image
+//    }
+
 
 
 //

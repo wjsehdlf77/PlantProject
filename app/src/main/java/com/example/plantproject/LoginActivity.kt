@@ -37,6 +37,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import com.example.plantproject.DetailActivity.DetectActivity
 
 import com.example.plantproject.Login.LoginService
 import com.example.plantproject.databinding.ActivityLoginBinding
@@ -58,6 +59,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         val spannable = SpannableStringBuilder("아이디가 없으시면 이곳에서 회원가입 해주시기 바랍니다.")
         binding.textView5.setText(spannable, TextView.BufferType.SPANNABLE)

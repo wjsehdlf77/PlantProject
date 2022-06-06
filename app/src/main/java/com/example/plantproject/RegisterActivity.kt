@@ -26,6 +26,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.plantproject.DetailActivity.DetectActivity
 import com.example.plantproject.Login.LoginService
 import com.example.plantproject.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_main.*
@@ -96,8 +97,10 @@ class RegisterActivity : AppCompatActivity() {
                 if (isIdCheck) {
                     if (binding.editPassword.text.toString() == binding.editPasswordCheck.text.toString()) {
                         if (binding.agreedata.isChecked) {
+
                             registerAccount(binding.editId.text.toString(),binding.editPassword.text.toString(),
                                 binding.editName.text.toString(),binding.editBirth.text.toString())
+
                         } else {
                             Toast.makeText(this, "회원정보 수집에 동의해주세요", Toast.LENGTH_LONG).show()
                     }
@@ -137,8 +140,10 @@ class RegisterActivity : AppCompatActivity() {
                         "계정 등록에 성공하였습니다!",
                         Toast.LENGTH_SHORT
                     ).show()
-                    val intent = Intent(baseContext, LoginActivity::class.java)
+                    val intent = Intent(baseContext, DetectActivity::class.java)
+                    intent.putExtra("Key_id", userId)
                     startActivity(intent)
+                    finish()
                 } else {
                     Toast.makeText(baseContext,
                         "서버에 안들어감",
