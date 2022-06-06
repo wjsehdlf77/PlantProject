@@ -1,5 +1,6 @@
 package com.example.plantproject.Login
 
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -29,4 +30,5 @@ interface LoginService {
     fun requestIdCheck(
         @Field("idcheck") checkid :String
     ) : Call<ResponseBody?>?
+
 }
