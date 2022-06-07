@@ -16,7 +16,7 @@ interface ImageUpload {
     ): Call<ResponseBody?>
 
     @FormUrlEncoded
-    @POST("/userprofileimage/")
+    @POST("/userprofileimage/media/")
     fun userProfileImage(
         @Field("userid") id:String
     ) : Call<ResponseBody?>?
