@@ -141,7 +141,7 @@ class DetectActivity : AppCompatActivity() {
 }
     private fun ImageRetrofit(file: File){
 
-        val userId : String? = intent.getStringExtra("Key_id")
+        val userId : String? = intent.getStringExtra("register_id")
 
         var requestBody : RequestBody = RequestBody.create(MediaType.parse("image/*"),file)
 

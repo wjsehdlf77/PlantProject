@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,9 @@ import com.example.plantproject.NaviFragment.HomeFragment
 import com.example.plantproject.NaviFragment.MyPageFragment
 import com.example.plantproject.R
 import com.example.plantproject.databinding.FragmentMainSectionBinding
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.fragment_my_page.*
 
 
 class MainSectionFragment : Fragment() {
@@ -28,6 +32,9 @@ class MainSectionFragment : Fragment() {
     private lateinit var mainActivity: MainActivity
 
     private var isFabOpen = false
+
+    private var userid : String? = null
+
 
 
 
@@ -46,10 +53,15 @@ class MainSectionFragment : Fragment() {
         _binding = FragmentMainSectionBinding.inflate(inflater, container, false)
         return binding.root
 
+
+
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         navigationItemSelect()
 
@@ -78,24 +90,24 @@ class MainSectionFragment : Fragment() {
 
         }
 
-
-
-
     }
 
+
+
     private fun replaceFragment(fragment: Fragment) {
+
+
         val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
         fragmentTransaction.setCustomAnimations(
-            R.anim.slide_in,
-            R.anim.fade_out,
             R.anim.fade_in,
-            R.anim.slide_out
+            R.anim.fade_out,
         )
         fragmentTransaction.replace(R.id.main_section_layout, fragment)
         fragmentTransaction.commit()
     }
 
     private fun navigationItemSelect() {
+
         binding.bottomNavigationView.run {
             setOnItemSelectedListener { item ->
                 when (item.itemId) {

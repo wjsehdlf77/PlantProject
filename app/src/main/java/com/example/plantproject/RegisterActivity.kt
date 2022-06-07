@@ -141,7 +141,7 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     val intent = Intent(baseContext, DetectActivity::class.java)
-                    intent.putExtra("Key_id", userId)
+                    intent.putExtra("register_id", userId)
                     startActivity(intent)
                     finish()
                 } else {

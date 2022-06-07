@@ -5,7 +5,7 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:title="내 식물"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/home_24"
         android:iconTint="@color/light_green"/>
 
 
@@ -19,7 +19,7 @@
         android:id="@+id/action_mypage"
         android:enabled="true"
         android:title="마이페이지"
-        android:icon="@drawable/ic_user"
+        android:icon="@drawable/user_24"
         android:iconTint="@color/light_green"/>
 
 
