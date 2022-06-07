@@ -67,23 +67,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerTxtId" />
 
-        <EditText
-            android:id="@+id/editId"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/light_green"
-            android:ems="10"
-            android:hint="아이디를 입력해주세요."
-            android:inputType="textPersonName"
-            android:textSize="12sp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.139"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerTxtName" />
-
-<!--        <EditText-->
+        <!--        <EditText-->
 <!--            android:id="@+id/editBirth"-->
 <!--            android:layout_width="300dp"-->
 <!--            android:layout_height="wrap_content"-->
@@ -96,6 +80,22 @@
 <!--            app:layout_constraintEnd_toEndOf="parent"-->
 <!--            app:layout_constraintStart_toStartOf="parent"-->
 <!--            app:layout_constraintTop_toBottomOf="@+id/registerTxtBirth" />-->
+
+        <EditText
+            android:id="@+id/editId"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/light_green"
+            android:ems="10"
+            android:hint="아이디를 입력해주세요."
+            android:inputType="textPersonName"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.13"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerTxtName" />
 
         <Button
             android:id="@+id/btn_register"
@@ -127,11 +127,11 @@
             android:id="@+id/registerTxtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
             android:text="아이디 *"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintHorizontal_bias="0.073"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,7 +143,7 @@
             android:text="비밀번호 *"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintHorizontal_bias="0.07"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editId" />
 
@@ -155,7 +155,7 @@
             android:text="비밀번호 확인 *"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintHorizontal_bias="0.08"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
@@ -167,7 +167,7 @@
             android:text="이름 *"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintHorizontal_bias="0.079"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editPasswordCheck" />
 
@@ -179,7 +179,7 @@
             android:text="생년월일 *"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintHorizontal_bias="0.089"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editName" />
 
@@ -187,15 +187,14 @@
             android:id="@+id/btnidcheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/btn_effect_register"
             android:text="중복확인"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/registerTxtId"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.939"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerTxtName"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toEndOf="@+id/editId"
+            app:layout_constraintTop_toBottomOf="@+id/registerTxtName" />
 
         <TextView
             android:id="@+id/checkSuccess"
@@ -206,13 +205,11 @@
             android:text="사용 가능"
             android:textColor="@color/black"
             android:textIsSelectable="false"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/registerTxtId"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.939"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerTxtName"
-            app:layout_constraintVertical_bias="0.0" />
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/btnidcheck"
+            app:layout_constraintLeft_toLeftOf="@+id/btnidcheck"
+            app:layout_constraintRight_toRightOf="@+id/btnidcheck"
+            app:layout_constraintTop_toTopOf="@+id/btnidcheck" />
 
         <EditText
             android:id="@+id/editBirth"

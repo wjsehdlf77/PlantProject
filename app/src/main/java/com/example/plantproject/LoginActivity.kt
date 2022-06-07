@@ -55,11 +55,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+
+    val DATABASE_VERSION = 1
+    val DATABASE_NAME = "LocalDB.db"
+
+    private lateinit var localDB: LocalDB
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        localDB= LocalDB(this, DATABASE_NAME,null, DATABASE_VERSION)
 
 
         val spannable = SpannableStringBuilder("아이디가 없으시면 이곳에서 회원가입 해주시기 바랍니다.")
@@ -87,6 +95,12 @@ class LoginActivity : AppCompatActivity() {
             var id = binding.editLoginId.text.toString()
             var pw = binding.editLoginPassword.text.toString()
 
+//            if (id == "admin") {
+//                if (pw == "1234") {
+//                    IntentMainActivity(id)
+//                }
+//            }
+
 
 
 
@@ -99,7 +113,8 @@ class LoginActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         Toast.makeText(applicationContext, "로그인이 됐습니다.", Toast.LENGTH_SHORT).show()
-                        IntentMainActivity(id)
+                        localDB.registerUser(id)
+                        IntentMainActivity()
 
 
                     } else {
@@ -117,17 +132,12 @@ class LoginActivity : AppCompatActivity() {
 
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
-    private fun IntentMainActivity(id: String) {
+    private fun IntentMainActivity() {
         val intent = Intent(applicationContext, MainActivity::class.java)
-        intent.putExtra("Key_id", id)
         startActivity(intent)
         finish()
     }
 
-    private fun IntentRegisterActivity(id: String) {
-        val intent = Intent(applicationContext, MainActivity::class.java)
-        startActivity(intent)
-    }
 }
 
 

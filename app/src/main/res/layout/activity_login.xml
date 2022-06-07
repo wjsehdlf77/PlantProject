@@ -14,8 +14,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/in_layout_shape"
+        android:drawableLeft="@drawable/sign_in_alt_24"
         android:elevation="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="20dp"
         android:stateListAnimator="@null"
+
         android:text="로그인"
         android:textColor="@color/colorAccent"
         android:translationZ="10dp"
