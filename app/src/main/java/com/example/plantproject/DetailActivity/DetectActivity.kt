@@ -58,6 +58,8 @@ class DetectActivity : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
 
+    private var userId: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetectBinding.inflate(layoutInflater)
@@ -68,7 +70,7 @@ class DetectActivity : AppCompatActivity() {
             intentLoginActivity()
         }
 
-
+        userId = intent.getStringExtra("register_id")
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -122,6 +124,7 @@ class DetectActivity : AppCompatActivity() {
             ImageDecoder.decodeBitmap(source)?.let {
                 val bitmap = resizeBitmap(it, 900f, 0f)
                 val file = createFileFromBitmap(bitmap)
+
                 ImageRetrofit(file)
 
                 intentLoginActivity()
@@ -141,11 +144,11 @@ class DetectActivity : AppCompatActivity() {
 }
     private fun ImageRetrofit(file: File){
 
-        val userId : String? = intent.getStringExtra("register_id")
 
+        Log.d("아오", file.name)
         var requestBody : RequestBody = RequestBody.create(MediaType.parse("image/*"),file)
 
-        var body : MultipartBody.Part = MultipartBody.Part.createFormData("userimage",file.name,requestBody)
+        var body : MultipartBody.Part = MultipartBody.Part.createFormData("userimage", file.name,requestBody)
 
         val identify = RequestBody.create(MediaType.parse("text/plain"),userId!!)
 
@@ -222,7 +225,7 @@ class DetectActivity : AppCompatActivity() {
 
     @Throws(IOException::class)
     private fun createFileFromBitmap(bitmap: Bitmap): File {
-        val newFile = File(applicationContext.filesDir, makeImageFileName())
+        val newFile = File(applicationContext.filesDir, "$userId.jpeg")
         val out = FileOutputStream(newFile)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
         return newFile
