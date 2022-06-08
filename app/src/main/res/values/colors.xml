@@ -19,6 +19,12 @@
     <color name="main_icon">#49A25A</color>
 
     <color name="very_light_green">#00FF80</color>
+    
+    <color name="light_red">#FFB6C1</color>
+    
+    <color name="light_blue">#00FFFF</color>
+    
+    <color name="yellow">#E5F770</color>
 
 
 </resources>
