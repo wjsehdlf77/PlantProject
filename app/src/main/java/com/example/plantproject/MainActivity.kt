@@ -101,6 +101,10 @@ class MainActivity : AppCompatActivity(),  BottomNavigationView.OnNavigationItem
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        localDB.deleteData()
+    }
 
 }
 

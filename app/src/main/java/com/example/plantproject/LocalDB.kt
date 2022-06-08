@@ -58,6 +58,8 @@ class LocalDB (
         val projection = arrayOf(LocalDatas.userData.COLUMN_NAME_ID)
         //,LocalDatas.userData.COLUMN_NAME_ID, LocalDatas.userData.COLUMN_NAME_PASSWORD)
 
+        val order = "${BaseColumns._ID} DESC"
+
 
         //  WHERE "id" = id AND "password"=password 구문 적용하는 부분
         val last = "1"
@@ -70,7 +72,7 @@ class LocalDB (
             null,          // where 조건에 해당하는 값의 배열
             null,                   // 그룹 조건
             null,                   // having 조건
-            null,               // orderby 조건 지정
+            order,               // orderby 조건 지정
             last
         )
 
