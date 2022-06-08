@@ -4,46 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     tools:context=".Section.ProfileSectionFragment">
 
-    <FrameLayout
-        android:id="@+id/plantData"
-        android:layout_width="350dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/layout_shape"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/main_right_laytout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantTitle">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <WebView
+            android:id="@+id/waterGraph"
+            android:layout_width="330dp"
+            android:layout_height="250dp"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </WebView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/main_right_laytout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
         <WebView
             android:id="@+id/sensorGraph"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp">
+            android:layout_width="330dp"
+            android:layout_height="250dp"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </WebView>
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/btnLight"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/btn_effect_small"
-        android:text="습도"
-        app:layout_constraintStart_toEndOf="@+id/btnHum"
-        app:layout_constraintTop_toBottomOf="@+id/plantData" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btnTemp"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="190dp"
+        android:layout_marginStart="20dp"
         android:background="@drawable/btn_effect_small"
         android:text="온도"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantData" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <Button
         android:id="@+id/btnHum"
@@ -52,48 +74,19 @@
         android:layout_marginStart="10dp"
         android:background="@drawable/btn_effect_small"
         android:text="조도"
-        app:layout_constraintStart_toEndOf="@+id/btnTemp"
-        app:layout_constraintTop_toBottomOf="@+id/plantData" />
-
-    <FrameLayout
-        android:id="@+id/waterData"
-        android:layout_width="350dp"
-        android:layout_height="250dp"
-        android:background="@drawable/layout_shape"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waterTitle"
-        app:layout_constraintVertical_bias="0.23000002">
+        app:layout_constraintStart_toEndOf="@+id/btnTemp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
-        <WebView
-            android:id="@+id/waterGraph"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp" />
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/plantTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:text="제목"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/waterTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="제목"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTemp" />
+    <Button
+        android:id="@+id/btnLight"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/btn_effect_small"
+        android:text="습도"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnHum"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
