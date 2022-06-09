@@ -67,7 +67,7 @@ class MyPageFragment : Fragment() {
         val id = localDB.returnID()
         binding.userid.text = id
 
-        val url = "http://192.168.0.4:8000/media/$id.jpeg"
+        val url = "http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000/~/img/and/$id.jpeg"
 
         CoroutineScope(Dispatchers.Main).launch {
             try {
