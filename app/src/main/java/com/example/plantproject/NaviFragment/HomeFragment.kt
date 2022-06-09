@@ -11,12 +11,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.example.plantproject.LocalDB
+import com.example.plantproject.Login.LoginService
+import com.example.plantproject.Login.Post
+import com.example.plantproject.Login.SensorDown
 import com.example.plantproject.MainActivity
 import com.example.plantproject.R
 import com.example.plantproject.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_my_page.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.*
+import retrofit2.converter.gson.GsonConverterFactory
+import java.net.URL
 
 
 open class HomeFragment : Fragment() {
@@ -25,11 +38,15 @@ open class HomeFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
 
-    val temp = "30"
-    val hum = "30"
-    val light = "5000"
+
+
     val name = "율마"
-    val isHealth:Boolean = false
+    val isHealth: Boolean = false
+
+    val DATABASE_VERSION = 1
+    val DATABASE_NAME = "LocalDB.db"
+
+    private lateinit var localDB: LocalDB
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,12 +60,65 @@ open class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
+
     }
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val url = "http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000/snapshot"
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val bitmap = withContext(Dispatchers.IO) {
+                    MyPageFragment.imageLoader.loadImage(url)
+                }
+                Glide.with(mainActivity).load(bitmap).into(binding.picamera)
+            } catch (e: Exception) {
+
+                e.printStackTrace()
+                Toast.makeText(requireContext(), "연결 오류", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        var retrofit = Retrofit.Builder()
+            .baseUrl("http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        var sensorDown: SensorDown = retrofit.create(SensorDown::class.java)
+
+        sensorDown.getSensor().enqueue(object : Callback<List<Post>>{
+            override fun onFailure(call: Call<List<Post>>, t: Throwable) {
+
+            }
+            override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+
+                val posts: List<Post>? = response.body()
+                val index = posts?.last()
+                val temp = index?.temp!!
+                val hum = index?.humid!!
+                val light = index?.light!!
+
+                binding.tempDetail.text = "$temp°C"
+                binding.humDetail.text = "$hum%"
+                binding.lightDetail.text = "${light}lx"
+
+                binding.tempPro.progress = temp.toInt()
+                binding.humPro.progress = hum.toInt()
+                binding.lightPro.progress = light.toInt()
+
+                Log.d("아오", "$temp,$hum,$light")
+
+            }
+        })
+
+        localDB= LocalDB(mainActivity, DATABASE_NAME,null, DATABASE_VERSION)
+
+        val id = localDB.returnID()
+
         binding.tempPro.max = 50
         binding.tempPro.min = -20
         binding.humPro.max = 100
@@ -56,13 +126,7 @@ open class HomeFragment : Fragment() {
         binding.lightPro.max = 30000
         binding.lightPro.min = 0
 
-        binding.tempDetail.text = "$temp°C"
-        binding.humDetail.text = "$hum%"
-        binding.lightDetail.text = "${light}lx"
 
-        binding.tempPro.progress = temp.toInt()
-        binding.humPro.progress = hum.toInt()
-        binding.lightPro.progress = light.toInt()
         binding.myPlantName.text = name
 
         val health = "${name}은/는 건강해요!!!!"
@@ -72,6 +136,21 @@ open class HomeFragment : Fragment() {
         } else {
             binding.myPlantHealth.text = hurt
         }
+    }
+
+    object imageLoader {
+
+        suspend fun loadImage(imageUrl: String): Bitmap {
+
+
+            val url = URL(imageUrl)
+            val stream = url.openStream()
+
+            return BitmapFactory.decodeStream(stream)
+
+        }
+    }
+}
 
 
 

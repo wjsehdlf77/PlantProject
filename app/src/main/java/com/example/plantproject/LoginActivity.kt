@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.4:8000")
+            .baseUrl("http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         var loginService: LoginService = retrofit.create(LoginService::class.java)
