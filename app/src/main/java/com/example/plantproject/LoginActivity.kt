@@ -62,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var localDB: LocalDB
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -87,6 +88,7 @@ class LoginActivity : AppCompatActivity() {
 
         var retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000")
+
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         var loginService: LoginService = retrofit.create(LoginService::class.java)
@@ -95,14 +97,13 @@ class LoginActivity : AppCompatActivity() {
             var id = binding.editLoginId.text.toString()
             var pw = binding.editLoginPassword.text.toString()
 
-//            if (id == "admin") {
-//                if (pw == "1234") {
-//                    IntentMainActivity(id)
-//                }
-//            }
 
 
-
+            if (id == "admin"){
+                if(pw == "1234"){
+                    IntentMainActivity()
+                }
+            }
 
             loginService.requestLogin(id, pw)?.enqueue(object : Callback<ResponseBody?> {
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {

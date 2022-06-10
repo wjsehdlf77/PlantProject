@@ -31,6 +31,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Url
 import java.net.URL
+import kotlin.concurrent.thread
 
 //마이페이지 프로필 수정
 
@@ -63,6 +64,15 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        thread(start = true) {
+            loading(true)
+            Thread.sleep(2000)
+            loading(false)
+            mainActivity.runOnUiThread {
+                binding.profilelayout.visibility = View.VISIBLE
+            }
+        }
+
         localDB = LocalDB(mainActivity, DATABASE_NAME, null, DATABASE_VERSION)
         val id = localDB.returnID()
         binding.userid.text = id
@@ -84,24 +94,17 @@ class MyPageFragment : Fragment() {
         }
 
 
-//        var retrofit = Retrofit.Builder()
-//            .baseUrl("http://192.168.0.4:8000")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//        var imageUpload = retrofit.create(ImageUpload::class.java)
-//
-//        imageUpload.userProfileImage(id)?.enqueue(object : Callback<ResponseBody?> {
-//            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-//
-//            }
-//
-//            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
-//                Log.d("아우", response.toString() + call)
-//            }
-//        })
-//    }
 
 
+    }
+
+    private fun loading(isShow: Boolean) {
+
+        if (isShow) {
+            binding.loadProgressbar.visibility = View.VISIBLE
+        } else {
+            binding.loadProgressbar.visibility = View.INVISIBLE
+        }
     }
 
     object imageLoader {
