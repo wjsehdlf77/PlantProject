@@ -12,6 +12,7 @@ import android.webkit.WebViewClient
 import com.example.plantproject.MainActivity
 import com.example.plantproject.databinding.FragmentProfileSectionBinding
 import java.net.URL
+import kotlin.concurrent.thread
 
 
 class ProfileSectionFragment : Fragment() {
@@ -36,6 +37,24 @@ class ProfileSectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        thread(start = true) {
+            waterloading(true)
+            Thread.sleep(900)
+            waterloading(false)
+            mainActivity.runOnUiThread {
+                binding.waterGraph.visibility = View.VISIBLE
+            }
+        }
+
+        thread(start = true) {
+            sensorloading(true)
+            Thread.sleep(900)
+            sensorloading(false)
+            mainActivity.runOnUiThread {
+                binding.sensorGraph.visibility = View.VISIBLE
+            }
+        }
+
         binding.sensorGraph.apply {
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
@@ -46,14 +65,6 @@ class ProfileSectionFragment : Fragment() {
         binding.sensorGraph.loadUrl("http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000/temp")
 
 
-//        binding.waterGraph.apply {
-//            webViewClient = WebViewClient()
-//            settings.javaScriptEnabled = true
-//        }
-//
-//
-//
-//        binding.waterGraph.loadUrl("https://www.google.com")
 
         binding.btnTemp.setOnClickListener {
             binding.sensorGraph.apply {
@@ -118,6 +129,24 @@ class ProfileSectionFragment : Fragment() {
 
             return BitmapFactory.decodeStream(stream)
 
+        }
+    }
+
+    private fun waterloading(isShow: Boolean) {
+
+        if (isShow) {
+            binding.waterProgressbar.visibility = View.VISIBLE
+        } else {
+            binding.waterProgressbar.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun sensorloading(isShow: Boolean) {
+
+        if (isShow) {
+            binding.sensorProgressbar.visibility = View.VISIBLE
+        } else {
+            binding.sensorProgressbar.visibility = View.INVISIBLE
         }
     }
 

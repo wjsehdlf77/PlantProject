@@ -87,7 +87,8 @@ class LoginActivity : AppCompatActivity() {
 
 
         var retrofit = Retrofit.Builder()
-            .baseUrl("http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000")
+//            .baseUrl("http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000")
+            .baseUrl("http://192.168.0.4:8000")
 
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -98,12 +99,6 @@ class LoginActivity : AppCompatActivity() {
             var pw = binding.editLoginPassword.text.toString()
 
 
-
-            if (id == "admin"){
-                if(pw == "1234"){
-                    IntentMainActivity()
-                }
-            }
 
             loginService.requestLogin(id, pw)?.enqueue(object : Callback<ResponseBody?> {
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
@@ -131,12 +126,14 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
 
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
     }
     private fun IntentMainActivity() {
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
         finish()
+
+        overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
     }
 
 }
