@@ -37,23 +37,7 @@ class ProfileSectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        thread(start = true) {
-            waterloading(true)
-            Thread.sleep(900)
-            waterloading(false)
-            mainActivity.runOnUiThread {
-                binding.waterGraph.visibility = View.VISIBLE
-            }
-        }
 
-        thread(start = true) {
-            sensorloading(true)
-            Thread.sleep(900)
-            sensorloading(false)
-            mainActivity.runOnUiThread {
-                binding.sensorGraph.visibility = View.VISIBLE
-            }
-        }
 
         binding.sensorGraph.apply {
             webViewClient = WebViewClient()
@@ -132,22 +116,8 @@ class ProfileSectionFragment : Fragment() {
         }
     }
 
-    private fun waterloading(isShow: Boolean) {
 
-        if (isShow) {
-            binding.waterProgressbar.visibility = View.VISIBLE
-        } else {
-            binding.waterProgressbar.visibility = View.INVISIBLE
-        }
-    }
 
-    private fun sensorloading(isShow: Boolean) {
 
-        if (isShow) {
-            binding.sensorProgressbar.visibility = View.VISIBLE
-        } else {
-            binding.sensorProgressbar.visibility = View.INVISIBLE
-        }
-    }
 
 }
