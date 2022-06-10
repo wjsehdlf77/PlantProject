@@ -1,6 +1,7 @@
 package com.example.plantproject.NaviFragment
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -12,11 +13,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
+import com.example.plantproject.DetailActivity.AddRegisterActivity
 import com.example.plantproject.LocalDB
 import com.example.plantproject.Login.ImageUpload
 import com.example.plantproject.Login.LoginService
 
 import com.example.plantproject.MainActivity
+import com.example.plantproject.R
 
 import com.example.plantproject.databinding.FragmentMyPageBinding
 import kotlinx.coroutines.CoroutineScope
@@ -93,10 +96,17 @@ class MyPageFragment : Fragment() {
 
         }
 
+        binding.changeProfile.setOnClickListener {
+            val intent = Intent(mainActivity, AddRegisterActivity::class.java)
+            startActivity(intent)
+            mainActivity.overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
+        }
+
 
 
 
     }
+
 
     private fun loading(isShow: Boolean) {
 

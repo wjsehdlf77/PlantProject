@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -16,14 +15,11 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.plantproject.LocalDB
-import com.example.plantproject.Login.LoginService
 import com.example.plantproject.Login.Post
-import com.example.plantproject.Login.SensorDown
+import com.example.plantproject.Login.GetData
 import com.example.plantproject.MainActivity
-import com.example.plantproject.R
 import com.example.plantproject.databinding.FragmentHomeBinding
 
-import kotlinx.android.synthetic.main.fragment_my_page.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +30,6 @@ import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.URL
 import kotlin.concurrent.thread
-import kotlin.concurrent.timer
 
 
 open class HomeFragment : Fragment() {
@@ -112,9 +107,9 @@ open class HomeFragment : Fragment() {
 
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        var sensorDown: SensorDown = retrofit.create(SensorDown::class.java)
+        var getData: GetData = retrofit.create(GetData::class.java)
 
-        sensorDown.getSensor().enqueue(object : Callback<List<Post>> {
+        getData.getSensor().enqueue(object : Callback<List<Post>> {
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
 
             }
