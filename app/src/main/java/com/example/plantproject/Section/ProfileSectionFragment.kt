@@ -91,6 +91,15 @@ class ProfileSectionFragment : Fragment() {
 
             binding.sensorGraph.loadUrl("http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000/humid")
         }
+
+        binding.waterGraph.apply {
+            webViewClient = WebViewClient()
+            settings.javaScriptEnabled = true
+            settings.loadWithOverviewMode = true
+            settings.useWideViewPort = true
+        }
+
+        binding.waterGraph.loadUrl("http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000/water")
     }
 
     override fun onDestroy() {

@@ -35,7 +35,8 @@ class MainSectionFragment : Fragment() {
 
     private var userid : String? = null
 
-
+    private var homeFragment : HomeFragment? = null
+    private var myPageFragment : MyPageFragment? = null
 
 
 
@@ -62,8 +63,9 @@ class MainSectionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         navigationItemSelect()
+
+
 
         binding.fabMain.setOnClickListener {
             toogleFab()
@@ -94,7 +96,8 @@ class MainSectionFragment : Fragment() {
 
 
 
-    private fun replaceFragment(fragment: Fragment) {
+
+    private fun replaceFragment(fragment1: Fragment) {
 
 
         val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
@@ -102,24 +105,88 @@ class MainSectionFragment : Fragment() {
             R.anim.fade_in,
             R.anim.fade_out,
         )
-        fragmentTransaction.replace(R.id.main_section_layout, fragment)
-        fragmentTransaction.commit()
+        fragmentTransaction.replace(R.id.main_section_layout, fragment1).commit()
+
     }
 
     private fun navigationItemSelect() {
 
-        binding.bottomNavigationView.run {
-            setOnItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.action_home -> replaceFragment(HomeFragment())
-                    R.id.action_mypage -> replaceFragment(MyPageFragment())
+        homeFragment = HomeFragment()
+        val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.main_section_layout, homeFragment!!)
+
+        fragmentTransaction.commit()
+
+
+        binding.bottomNavigationView.setOnItemSelectedListener {
+
+                when (it.itemId) {
+                    R.id.action_mypage -> {
+                        if (myPageFragment == null){
+                            myPageFragment = MyPageFragment()
+                            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+                            fragmentTransaction.setCustomAnimations(
+                                R.anim.fade_in,
+                                R.anim.fade_out,
+                            )
+
+                            fragmentTransaction.add(R.id.main_section_layout, myPageFragment!!).commit()
+
+
+                        }
+                        if(myPageFragment != null){
+                            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+                            fragmentTransaction.setCustomAnimations(
+                                R.anim.fade_in,
+                                R.anim.fade_out,
+                            )
+                            fragmentTransaction.show(myPageFragment!!).commit()
+                        }
+
+                        if(homeFragment != null){
+                            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+                            fragmentTransaction.hide(homeFragment!!).commit()
+                        }
+
+                        true
+                    }
+                    R.id.action_home -> {
+                        if (homeFragment == null){
+                            homeFragment = HomeFragment()
+                            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+                            fragmentTransaction.setCustomAnimations(
+                                R.anim.fade_in,
+                                R.anim.fade_out,
+                            )
+                            fragmentTransaction.add(R.id.main_section_layout, homeFragment!!).commit()
+
+                        }
+                        if(homeFragment != null){
+                            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+                            fragmentTransaction.setCustomAnimations(
+                                R.anim.fade_in,
+                                R.anim.fade_out,
+                            )
+                            fragmentTransaction.show(homeFragment!!).commit()
+                        }
+                        if(myPageFragment != null){
+                            val fragmentTransaction: FragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+                            fragmentTransaction.hide(myPageFragment!!).commit()
+                        }
+
+                        true
+
+                    }
+
+                    else ->{
+                        true
+                    }
 
                 }
-                true
-            }
-            selectedItemId = R.id.action_home
+
         }
     }
+
 
     private fun toogleFab() {
 
@@ -153,11 +220,6 @@ class MainSectionFragment : Fragment() {
         isFabOpen = !isFabOpen
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-
-    }
 
 
 

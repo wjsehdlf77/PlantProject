@@ -126,6 +126,7 @@ class RegisterActivity : AppCompatActivity() {
         // Retrofit 객체 생성
         val builder2 = Retrofit.Builder()
             .baseUrl("http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000")
+
             .addConverterFactory(GsonConverterFactory.create())
         val retrofit2 = builder2.build()
         val myAPI2: LoginService = retrofit2.create(LoginService::class.java)
