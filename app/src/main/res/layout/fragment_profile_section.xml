@@ -18,25 +18,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
-            android:id="@+id/sensorProgressbar"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="76dp"
-            android:layout_height="76dp"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:indeterminateTint="@color/very_light_green"/>
-
         <WebView
             android:id="@+id/sensorGraph"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:visibility="invisible">
+            android:visibility="visible">
 
         </WebView>
     </FrameLayout>
@@ -82,25 +69,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLight">
 
-        <ProgressBar
-            android:id="@+id/waterProgressbar"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="76dp"
-            android:layout_height="76dp"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/very_light_green"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <WebView
             android:id="@+id/waterGraph"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible" />
+            android:visibility="visible" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

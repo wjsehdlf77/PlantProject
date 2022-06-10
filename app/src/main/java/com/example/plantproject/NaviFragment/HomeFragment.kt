@@ -44,7 +44,7 @@ open class HomeFragment : Fragment() {
     var msg = ""
 
     val name = "율마"
-    val isHealth: Boolean = false
+    val isHealth: Boolean = true
 
     val DATABASE_VERSION = 1
     val DATABASE_NAME = "LocalDB.db"

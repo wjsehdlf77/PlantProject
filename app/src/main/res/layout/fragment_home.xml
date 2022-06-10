@@ -150,7 +150,8 @@
             android:id="@+id/btn_water"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:background="@drawable/profile_button"
+            android:text="물주기"
             app:layout_constraintBottom_toTopOf="@+id/tempPro"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.12"
@@ -162,13 +163,16 @@
             android:id="@+id/switch_led"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Switch"
+            android:drawableLeft="@drawable/size_main_icon_light"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track_select"
             app:layout_constraintBottom_toTopOf="@+id/tempPro"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.876"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/picamera"
-            app:layout_constraintVertical_bias="0.75" />
+            app:layout_constraintVertical_bias="0.75"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
