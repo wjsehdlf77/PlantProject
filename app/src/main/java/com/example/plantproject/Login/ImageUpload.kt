@@ -15,9 +15,8 @@ interface ImageUpload {
         @Part userimage : MultipartBody.Part
     ): Call<ResponseBody?>
 
-    @FormUrlEncoded
-    @POST("/userprofileimage/media/")
+    @GET("/~/img/and/{userid}.jpeg/")
     fun userProfileImage(
-        @Field("userid") id:String
-    ) : Call<ResponseBody?>?
+        @Path("userid") id:String
+    ) : Call<ResponseBody>
 }
