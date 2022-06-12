@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide
 import com.example.plantproject.LocalDB
 import com.example.plantproject.Login.Post
 import com.example.plantproject.Login.GetData
+import com.example.plantproject.Login.GetLabel
+import com.example.plantproject.Login.ImageUpload
 import com.example.plantproject.MainActivity
 import com.example.plantproject.databinding.FragmentHomeBinding
 
@@ -43,7 +45,7 @@ open class HomeFragment : Fragment() {
     val TOPIC_PB: String = "plant_pb"
     var msg = ""
 
-    val name = "율마"
+
     val isHealth: Boolean = true
 
     val DATABASE_VERSION = 1
@@ -91,15 +93,8 @@ open class HomeFragment : Fragment() {
         binding.humPro.min = 0
         binding.lightPro.max = 30000
         binding.lightPro.min = 0
-        binding.myPlantName.text = name
 
-        val health = "${name}은/는 건강해요!!!!"
-        val hurt = "${name}은/는 너무아파요... 살려주세요"
-        if (isHealth) {
-            binding.myPlantHealth.text = health
-        } else {
-            binding.myPlantHealth.text = hurt
-        }
+
 
 
         var retrofit = Retrofit.Builder()
@@ -135,6 +130,41 @@ open class HomeFragment : Fragment() {
                 }
             }
         })
+
+
+        val imageUpload = retrofit.create(ImageUpload::class.java)
+
+        imageUpload.userPlantName(id).enqueue(object :Callback<GetLabel>{
+            override fun onFailure(call: Call<GetLabel>, t: Throwable) {
+
+            }
+
+            override fun onResponse(call: Call<GetLabel>, response: Response<GetLabel>) {
+                if(response.isSuccessful) {
+                    val data = response.body()
+                    Log.d("아오", "${data}")
+
+                    val label = data?.plantname
+                    val name = data?.user
+                    Log.d("아오", "${label},${name} ")
+
+                    if (label != null) {
+                        binding.myPlantName.setText(label)
+                        val health = "${label}은/는 건강해요!!!!"
+                        val hurt = "${label}은/는 너무아파요... 살려주세요"
+                        if (isHealth) {
+                            binding.myPlantHealth.text = health
+                        } else {
+                            binding.myPlantHealth.text = hurt
+                        }
+                    }
+
+
+                }
+            }
+        })
+
+
 
 
         val url = "http://ec2-18-170-251-149.eu-west-2.compute.amazonaws.com:8000/snapshot"
