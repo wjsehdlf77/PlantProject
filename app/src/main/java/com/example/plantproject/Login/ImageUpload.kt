@@ -19,4 +19,10 @@ interface ImageUpload {
     fun userProfileImage(
         @Path("userid") id:String
     ) : Call<ResponseBody>
+
+    @GET("/profileimage/{userid}")
+    fun userPlantName(
+        @Path("userid") id:String
+
+    ) : Call<GetLabel>
 }
