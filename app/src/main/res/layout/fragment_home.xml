@@ -168,7 +168,7 @@
             android:track="@drawable/switch_track_select"
             app:layout_constraintBottom_toTopOf="@+id/tempPro"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.876"
+            app:layout_constraintHorizontal_bias="0.88"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/picamera"
             app:layout_constraintVertical_bias="0.75"

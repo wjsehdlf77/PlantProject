@@ -67,7 +67,7 @@ class MyPageFragment : Fragment() {
 
         thread(start = true) {
             loading(true)
-            Thread.sleep(2000)
+            Thread.sleep(3000)
             loading(false)
             mainActivity.runOnUiThread {
                 binding.profilelayout.visibility = View.VISIBLE
