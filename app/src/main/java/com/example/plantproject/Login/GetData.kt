@@ -25,4 +25,8 @@ interface GetData {
         @Field("username") username: String,
         @Field("userbirth") userbirth: String
     ): Call<ResponseBody>
+
+    @GET("photo")
+    fun getHealth(
+    ): Call<List<GetHealth>>
 }

@@ -21,6 +21,9 @@
         android:theme="@style/Theme.PlantProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".LoadingActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailActivity.AddRegisterActivity"
             android:exported="false" />
         <activity
@@ -66,7 +69,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

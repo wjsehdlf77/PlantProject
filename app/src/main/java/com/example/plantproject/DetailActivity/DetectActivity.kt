@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.os.FileUtils
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -26,6 +27,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
+import com.example.plantproject.LoadingActivity
 import com.example.plantproject.Login.ImageUpload
 import com.example.plantproject.Login.LoginService
 import com.example.plantproject.LoginActivity
@@ -49,6 +51,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.concurrent.thread
 
 
 class DetectActivity : AppCompatActivity() {
@@ -67,7 +70,7 @@ class DetectActivity : AppCompatActivity() {
 
 
             binding.btnLater.setOnClickListener {
-            intentLoginActivity()
+            intentLodingActivity()
         }
 
         userId = intent.getStringExtra("register_id")
@@ -112,8 +115,8 @@ class DetectActivity : AppCompatActivity() {
 
     }
 
-    private fun intentLoginActivity() {
-        val intent = Intent(baseContext, LoginActivity::class.java)
+    private fun intentLodingActivity() {
+        val intent = Intent(baseContext, LoadingActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -127,7 +130,7 @@ class DetectActivity : AppCompatActivity() {
 
                 ImageRetrofit(file)
 
-                intentLoginActivity()
+                intentLodingActivity()
 
 
 
@@ -137,7 +140,7 @@ class DetectActivity : AppCompatActivity() {
                 val bitmap = resizeBitmap(it, 900f, 0f)
                 val file = createFileFromBitmap(bitmap)
                 ImageRetrofit(file)
-                intentLoginActivity()
+                intentLodingActivity()
             }
         }
 
@@ -168,8 +171,7 @@ class DetectActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(baseContext, "프로필사진등록하셔습니다", Toast.LENGTH_LONG).show();
-                    Log.d("레트로핏 결과2",""+response?.body().toString())
+
                 } else {
                     Toast.makeText(baseContext, "Some error occurred...", Toast.LENGTH_LONG).show();
                     Log.d("레트로핏 결과2",""+response?.body().toString())
@@ -301,6 +303,8 @@ class DetectActivity : AppCompatActivity() {
                 }
             }.toTypedArray()
     }
+
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:

@@ -2,6 +2,7 @@ package com.example.plantproject.NaviFragment
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
@@ -13,12 +14,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.example.plantproject.LocalDB
-import com.example.plantproject.Login.Post
-import com.example.plantproject.Login.GetData
-import com.example.plantproject.Login.GetLabel
-import com.example.plantproject.Login.ImageUpload
+import com.example.plantproject.Login.*
 import com.example.plantproject.MainActivity
 import com.example.plantproject.databinding.FragmentHomeBinding
 
@@ -46,10 +45,10 @@ open class HomeFragment : Fragment() {
     var msg = ""
 
 
-    val isHealth: Boolean = true
 
     val DATABASE_VERSION = 1
     val DATABASE_NAME = "LocalDB.db"
+
 
     private lateinit var localDB: LocalDB
 
@@ -65,6 +64,7 @@ open class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
 
     }
 
@@ -83,6 +83,7 @@ open class HomeFragment : Fragment() {
             }
         }
 
+
         localDB = LocalDB(mainActivity, DATABASE_NAME, null, DATABASE_VERSION)
 
         val id = localDB.returnID()
@@ -91,8 +92,10 @@ open class HomeFragment : Fragment() {
         binding.tempPro.min = -20
         binding.humPro.max = 100
         binding.humPro.min = 0
-        binding.lightPro.max = 30000
+        binding.lightPro.max = 1000
         binding.lightPro.min = 0
+
+
 
 
 
@@ -115,7 +118,7 @@ open class HomeFragment : Fragment() {
                     val posts: List<Post>? = response.body()
                     val index = posts?.last()
                     val temp = index?.temp!!
-                    val hum = index?.humid!!
+                    val hum = index?.soil_hum!!
                     val light = index?.light!!
 
                     binding.tempDetail.text = "$temp°C"
@@ -144,20 +147,51 @@ open class HomeFragment : Fragment() {
                     val data = response.body()
                     Log.d("아오", "${data}")
 
-                    val label = data?.plantname
+                    var label = data?.plantname!!
+                    if (label == "옥살리스(사랑초)") {
+                        label = "사랑초"
+                    } else if (label == "골드크레스트 \"윌마\"") {
+                        label = "윌마"
+                    }
                     val name = data?.user
                     Log.d("아오", "${label},${name} ")
 
                     if (label != null) {
                         binding.myPlantName.setText(label)
-                        val health = "${label}은/는 건강해요!!!!"
-                        val hurt = "${label}은/는 너무아파요... 살려주세요"
-                        if (isHealth) {
-                            binding.myPlantHealth.text = health
-                        } else {
-                            binding.myPlantHealth.text = hurt
-                        }
+//                        val health = "${label}은/는 건강해요!!!!"
+//                        val hurt = "${label}은/는 너무아파요... 살려주세요"
+//                        if (isHealth) {
+//                            binding.myPlantHealth.text = health
+//                        } else {
+//                            binding.myPlantHealth.text = hurt
+//                        }
                     }
+
+
+                }
+            }
+        })
+
+
+
+        getData.getHealth().enqueue(object :Callback<List<GetHealth>>{
+            override fun onFailure(call: Call<List<GetHealth>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<GetHealth>>,
+                response: Response<List<GetHealth>>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    val health = data?.last()
+                    if (health?.health == "Your plants are healthy.") {
+                        binding.myPlantHealth.setText("아글라오네마은/는 건강해요!!!!")
+                    } else {
+                        binding.myPlantHealth.setText("너무 아파요....")
+                    }
+
 
 
                 }
@@ -191,11 +225,11 @@ open class HomeFragment : Fragment() {
         mqttClient = MqttClient(ServerIP, MqttClient.generateClientId(), null)
         mqttClient.connect()
 
-        binding.btnWater.setOnClickListener {
-            msg = ""
-            Log.d("MQTTService", "Send")
-            mqttClient.publish(TOPIC, MqttMessage("WATER".toByteArray()))
-        }
+//        binding.btnWater.setOnClickListener {
+//            msg = ""
+//            Log.d("MQTTService", "Send")
+//            mqttClient.publish(TOPIC, MqttMessage("WATER".toByteArray()))
+//        }
 
         binding.switchLed.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -210,6 +244,7 @@ open class HomeFragment : Fragment() {
         }
 
     }
+
 
 
 
